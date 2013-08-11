@@ -52,18 +52,17 @@ class DublinCommuter extends LocalStorage
         do @weatherManager.populate
 
     handleLuasStationFound: (data) =>
-        @emitEvent DublinCommuter.LUAS_STATUS, [@]
+        @emitEvent DublinCommuter.STATUS_CHANGE_EVENT, [@]
 
     handleLuasStationUnknown: (data) =>
-        @emitEvent DublinCommuter.LUAS_STATUS, [@]
+        @emitEvent DublinCommuter.STATUS_CHANGE_EVENT, [@]
         @luasManager.setStation data[0]
 
     handleLuasSystemDown: () =>
-        @emitEvent DublinCommuter.LUAS_STATUS, [@]
+        @emitEvent DublinCommuter.STATUS_CHANGE_EVENT, [@]
 
     handleLuasForecastSuccess: (data) =>
-        console.log @luasManager.forecastData
-        @emitEvent DublinCommuter.LUAS_STATUS, [@]
+        @emitEvent DublinCommuter.STATUS_CHANGE_EVENT, [@]
 
     handleLuasForecastFailure: (data) =>
         data

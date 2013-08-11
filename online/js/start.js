@@ -13,7 +13,7 @@
     var deferred, dublinCommuter, factoryObject;
     deferred = $q.defer();
     dublinCommuter = new DublinCommuter;
-    dublinCommuter.addListener(DublinCommuter.LUAS_STATUS, function(dublinCommuterInstance) {
+    dublinCommuter.addListener(DublinCommuter.STATUS_CHANGE_EVENT, function(dublinCommuterInstance) {
       return safeApply($rootScope, function() {
         return deferred.resolve(dublinCommuterInstance);
       });
@@ -1490,21 +1490,20 @@
     };
 
     DublinCommuter.prototype.handleLuasStationFound = function(data) {
-      return this.emitEvent(DublinCommuter.LUAS_STATUS, [this]);
+      return this.emitEvent(DublinCommuter.STATUS_CHANGE_EVENT, [this]);
     };
 
     DublinCommuter.prototype.handleLuasStationUnknown = function(data) {
-      this.emitEvent(DublinCommuter.LUAS_STATUS, [this]);
+      this.emitEvent(DublinCommuter.STATUS_CHANGE_EVENT, [this]);
       return this.luasManager.setStation(data[0]);
     };
 
     DublinCommuter.prototype.handleLuasSystemDown = function() {
-      return this.emitEvent(DublinCommuter.LUAS_STATUS, [this]);
+      return this.emitEvent(DublinCommuter.STATUS_CHANGE_EVENT, [this]);
     };
 
     DublinCommuter.prototype.handleLuasForecastSuccess = function(data) {
-      console.log(this.luasManager.forecastData);
-      return this.emitEvent(DublinCommuter.LUAS_STATUS, [this]);
+      return this.emitEvent(DublinCommuter.STATUS_CHANGE_EVENT, [this]);
     };
 
     DublinCommuter.prototype.handleLuasForecastFailure = function(data) {

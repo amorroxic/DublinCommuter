@@ -12,7 +12,7 @@ app.factory "dublinLuasFactory", ($q, $rootScope, safeApply) ->
     deferred = do $q.defer
 
     dublinCommuter = new DublinCommuter
-    dublinCommuter.addListener DublinCommuter.LUAS_STATUS, (dublinCommuterInstance) ->
+    dublinCommuter.addListener DublinCommuter.STATUS_CHANGE_EVENT, (dublinCommuterInstance) ->
         safeApply $rootScope, ->
         #$rootScope.$apply ->
             deferred.resolve dublinCommuterInstance
