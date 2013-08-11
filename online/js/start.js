@@ -1494,7 +1494,8 @@
     };
 
     DublinCommuter.prototype.handleLuasStationUnknown = function(data) {
-      return this.emitEvent(DublinCommuter.LUAS_STATUS, [this]);
+      this.emitEvent(DublinCommuter.LUAS_STATUS, [this]);
+      return this.luasManager.setStation(data[0]);
     };
 
     DublinCommuter.prototype.handleLuasSystemDown = function() {

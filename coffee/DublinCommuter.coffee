@@ -56,7 +56,7 @@ class DublinCommuter extends LocalStorage
 
     handleLuasStationUnknown: (data) =>
         @emitEvent DublinCommuter.LUAS_STATUS, [@]
-        #@luasManager.setStation data[0]
+        @luasManager.setStation data[0]
 
     handleLuasSystemDown: () =>
         @emitEvent DublinCommuter.LUAS_STATUS, [@]
