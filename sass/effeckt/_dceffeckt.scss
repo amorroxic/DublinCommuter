@@ -1,0 +1,61 @@
+$effeckt-transition-duration: 500ms !default;
+$effeckt-off-screen-navigation-transition-duration: $effeckt-transition-duration !default;
+@import "modules/off-screen-nav";
+
+.effeckt-off-screen-nav {
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  overflow-y: auto;
+  background: #333;
+  visibility: hidden;
+  width: 12rem; // default, but some effects require different things
+  ul {
+    list-style: none;
+  }
+  li {
+    &:first-child {
+      a { border-top: 0; }
+    }
+    &:last-child {
+      a { border-bottom: 0; }
+    }
+    a {
+      display: block;
+      padding: 0.3rem 1rem;
+      color: white;
+      border-bottom: 1px solid #444;
+      &:hover, &:focus {
+        background: #444;
+      }
+      &:active {
+        background: #222;
+      }
+    }
+  }
+  h4 {
+    color: white;
+    border-bottom: 1px solid #eee;
+    padding: 1rem 0.5rem 0.2rem 0;
+    margin: 0 1rem 1rem;
+    text-transform: uppercase;
+    font-size: 0.65rem;
+    letter-spacing: 0.1rem;
+    position: relative;
+  }
+}
+
+.effeckt-off-screen-nav-close {
+  position: absolute;
+  right: 0;
+  top: 0.65rem;
+  font-size: 150%;
+  &:hover, &:focus {
+    color: red;
+  }
+}
+.effeckt-off-screen-nav-rotate.effeckt-off-screen-nav-show ~ .page-wrap .off-screen-nav-cover {
+  background: linear-gradient(left, rgba(#eee, 0), rgba(#eee, 0.9));
+}

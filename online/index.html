@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]>    <html class="no-js iem7"> <![endif]-->
+<!--[if (gt IEMobile 7)|!(IEMobile)]><!--> <html class="no-js" ng-app="ngDublinCommuter"> <!--<![endif]-->
+
+	<!--
+		Don't waste your time trying to decypher minified javascript.
+		Sources are here:
+	-->
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="description" content="Luas schedules, traffic information and weather forecasts for Dublin">
+        <meta name="author" content="Adrian Mihai">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="cleartype" content="on">
+        <!-- Tile icon for Win8 (144x144 + tile color) -->
+        <meta name="msapplication-TileImage" content="img/touch/apple-touch-icon-144x144-precomposed.png">
+        <meta name="msapplication-TileColor" content="#222222">
+        <meta name="HandheldFriendly" content="True">
+        <meta name="MobileOptimized" content="320">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="apple-mobile-web-app-title" content="">
+        <title>Dublin Commuter</title>
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/touch/apple-touch-icon-144x144-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/touch/apple-touch-icon-114x114-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/touch/apple-touch-icon-72x72-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" href="img/touch/apple-touch-icon-57x57-precomposed.png">
+        <link rel="shortcut icon" href="img/touch/apple-touch-icon.png">
+		<link href='http://fonts.googleapis.com/css?family=Dosis:400,700' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="css/dc.css">
+
+        <!-- This script prevents links from opening in Mobile Safari. https://gist.github.com/1042026 -->
+        <script src="js/vendor/custom.modernizr.min.js"></script>
+        <script>(function(a,b,c){if(c in b&&b[c]){var d,e=a.location,f=/^(a|html)$/i;a.addEventListener("click",function(a){d=a.target;while(!f.test(d.nodeName))d=d.parentNode;"href"in d&&(d.href.indexOf("http")||~d.href.indexOf(e.host))&&(a.preventDefault(),e.href=d.href)},!1)}})(document,window.navigator,"standalone")</script>
+    </head>
+
+    <body ng-controller="DublinCommuterController">
+
+
+    <section class="menymenu">
+        <h4>
+            Navigation
+            <a href="#0" id="effeckt-off-screen-nav-close" class="effeckt-off-screen-nav-close">×</a>
+        </h4>
+        <ul>
+            <li><a href="#0">This</a></li>
+            <li><a href="#0">Little</a></li>
+            <li><a href="#0">Piggy</a></li>
+            <li><a href="#0">Went</a></li>
+            <li><a href="#0">To</a></li>
+            <li><a href="#0">Market</a></li>
+        </ul>
+    </section>
+
+    <div class="pagecontainer">
+		<header>
+            <div class="row">
+                <div class="twelve columns">
+                    <h1 class="heading">Hello Dublin Commuter</h1>
+                    <nav ng-show='dublinCommuter.luasManager.hasLuas()'>
+                        <div class="current">Windy Arbor</div>
+                    </nav>
+                </div>
+            </div>
+		</header>
+
+
+        <section>
+            <div class="row forecast">
+                <div class="twelve columns">
+                    <span>{{ 'status: '+ dublinCommuter.luasManager.hasForecast() }}</span>
+                    <span class="icon-forecast icon-rainy"></span><span class="temperature">19&deg;</span>
+                </div>
+            </div>
+            <div class="row luas">
+                <div class="twelve columns">
+                    <div class="schedule" ng-hide='dublinCommuter.luasManager.hasForecast()'><span class="icon-clock"></span><span class="details">No inbound forecast</span></div>
+                    <div class="schedule" ng-show='dublinCommuter.luasManager.hasForecast()'><span class="icon-clock"></span><span class="details">1 dsadas</span></div>
+                    <div class="current-time">12:33</div>
+                    <div class="schedule" ng-hide='dublinCommuter.luasManager.hasForecast()'><span class="icon-clock"></span><span class="details">No outbound forecast</span></div>
+                    <div class="schedule" ng-show='dublinCommuter.luasManager.hasForecast()'><span class="icon-clock"></span><span class="details">1 Minute Brides Glen</span></div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+        <!-- Load local Zepto.js or (as a fallback) jQuery from Google CDN or (as a fallback) local jQuery -->
+        <script>
+            document.write('<script src="' + ('__proto__' in {} ?
+                'js/vendor/zepto' :
+                'http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery') +
+                '.min.js"><\/script>')
+        </script>
+        <script>
+            window.Zepto || window.jQuery || document.write('<script src="js/vendor/jquery.min.js"><\/script>');
+        </script>
+		<script src="js/vendor/meny-ck.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+		<script src="js/start.js"></script>
+
+    </body>
+</html>
