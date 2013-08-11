@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!--[if IEMobile 7 ]>    <html class="no-js iem7"> <![endif]-->
-<!--[if (gt IEMobile 7)|!(IEMobile)]><!--> <html class="no-js" ng-app="ngDublinCommuter"> <!--<![endif]-->
+<!--[if (gt IEMobile 7)|!(IEMobile)]><!--> <html class="no-js" data-ng-app="ngDublinCommuter"> <!--<![endif]-->
 
 	<!--
 		Don't waste your time trying to decypher minified javascript.
@@ -36,7 +36,7 @@
         <script>(function(a,b,c){if(c in b&&b[c]){var d,e=a.location,f=/^(a|html)$/i;a.addEventListener("click",function(a){d=a.target;while(!f.test(d.nodeName))d=d.parentNode;"href"in d&&(d.href.indexOf("http")||~d.href.indexOf(e.host))&&(a.preventDefault(),e.href=d.href)},!1)}})(document,window.navigator,"standalone")</script>
     </head>
 
-    <body ng-controller="DublinCommuterController">
+    <body data-ng-controller="DublinCommuterController">
 
 
     <section class="menymenu">
@@ -45,7 +45,7 @@
             <a href="#0" id="effeckt-off-screen-nav-close" class="effeckt-off-screen-nav-close">×</a>
         </h4>
         <ul>
-            <li ng-repeat="station in dublinCommuter.luasManager.buildSuggestions()"><a href="#0">{{station.name}}</a></li>
+            <li data-ng-repeat="station in dublinCommuter.luasManager.buildSuggestions()"><a href="#0">{{station.name}}</a></li>
         </ul>
     </section>
 
@@ -54,7 +54,7 @@
             <div class="row">
                 <div class="twelve columns">
                     <h1 class="heading">Hello Dublin Commuter</h1>
-                    <nav ng-show='dublinCommuter.luasManager.hasLuas()'>
+                    <nav data-ng-show='dublinCommuter.luasManager.hasLuas()'>
                     <div class="current">{{dublinCommuter.luasManager.currentStation.name}}</div>
                     </nav>
                 </div>
@@ -70,11 +70,11 @@
             </div>
             <div class="row luas">
                 <div class="twelve columns">
-                    <div class="schedule" ng-hide='dublinCommuter.luasManager.hasForecast()'><span class="icon-clock"></span><span class="details">No inbound forecast</span></div>
-                    <div class="schedule" ng-show='dublinCommuter.luasManager.hasForecast()' ng-repeat='inbound in dublinCommuter.luasManager.forecastData.inbound'><span class="icon-clock"></span><span class="details"><span class="">{{inbound.time | timeformat }}</span> {{inbound.location}}</span></div>
+                    <div class="schedule" data-ng-hide='dublinCommuter.luasManager.hasForecast()'><span class="icon-clock"></span><span class="details">No inbound forecast</span></div>
+                    <div class="schedule" data-ng-show='dublinCommuter.luasManager.hasForecast()' data-ng-repeat='inbound in dublinCommuter.luasManager.forecastData.inbound'><span class="icon-clock"></span><span class="details"><span class="">{{inbound.time | timeformat }}</span> {{inbound.location}}</span></div>
                     <div class="current-time">12:33</div>
-                    <div class="schedule" ng-hide='dublinCommuter.luasManager.hasForecast()'><span class="icon-clock"></span><span class="details">No outbound forecast</span></div>
-                    <div class="schedule" ng-show='dublinCommuter.luasManager.hasForecast()' ng-repeat='inbound in dublinCommuter.luasManager.forecastData.outbound'><span class="icon-clock"></span><span class="details"><span class="">{{inbound.time | timeformat }}</span> {{inbound.location}}</span></div>
+                    <div class="schedule" data-ng-hide='dublinCommuter.luasManager.hasForecast()'><span class="icon-clock"></span><span class="details">No outbound forecast</span></div>
+                    <div class="schedule" data-ng-show='dublinCommuter.luasManager.hasForecast()' data-ng-repeat='inbound in dublinCommuter.luasManager.forecastData.outbound'><span class="icon-clock"></span><span class="details"><span class="">{{inbound.time | timeformat }}</span> {{inbound.location}}</span></div>
                 </div>
             </div>
         </section>
