@@ -26,7 +26,7 @@ class ForecastManager extends LocalStorage
 
         @hasForecast        = no
         @forecast           = {}
-        @weatherAPI         = 'http://dc.dev/api/v1/weather/for'
+        @weatherAPI         = 'http://api.dublin.io/api/v1/weather/for'
 
         @log "[Forecast] new"
 

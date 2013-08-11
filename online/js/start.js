@@ -50,9 +50,10 @@
     var filterFunction;
     filterFunction = function(input, param) {
       var returnValue;
+      console.log(input);
       returnValue = '';
       if (isFinite(input)) {
-        returnValue = input + (input === 1 ? ' minute' : ' minutes');
+        returnValue = input + (parseInt(input === 1) ? ' minute' : ' minutes');
       } else {
         returnValue = input;
       }
@@ -745,7 +746,7 @@
       };
       this.hasForecast = false;
       this.forecast = {};
-      this.weatherAPI = 'http://dc.dev/api/v1/weather/for';
+      this.weatherAPI = 'http://api.dublin.io/api/v1/weather/for';
       this.log("[Forecast] new");
     }
 
@@ -932,7 +933,7 @@
         latitude: params.latitude,
         longitude: params.longitude
       };
-      this.luasAPI = "http://dc.dev/api/v1/luas-forecast/for/";
+      this.luasAPI = "http://api.dublin.io/api/v1/luas-forecast/for/";
       this.luasStations = [
         {
           key: "st-stephens-green",

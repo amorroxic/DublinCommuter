@@ -42,9 +42,10 @@ app.factory "safeApply", ($rootScope) ->
 
 app.filter 'timeformat', () ->
     filterFunction = (input, param) ->
+        console.log input
         returnValue = ''
         if isFinite input
-            returnValue = input + (if input is 1 then ' minute' else ' minutes')
+            returnValue = input + (if parseInt input == 1 then ' minute' else ' minutes')
         else
             returnValue = input
         returnValue
