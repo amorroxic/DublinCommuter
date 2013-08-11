@@ -40,6 +40,16 @@ app.factory "safeApply", ($rootScope) ->
 
     factoryObject
 
+app.filter 'timeformat', () ->
+    filterFunction = (input, param) ->
+        returnValue = ''
+        if isFinite input
+            returnValue = input + (if input is 1 then ' minute' else ' minutes')
+        else
+            returnValue = input
+        returnValue
+    filterFunction
+
 app.controller "DublinCommuterController", ($scope, dublinLuasFactory) ->
 
     dublinCommuterPromise = do dublinLuasFactory.getApplicationPromise

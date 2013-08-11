@@ -373,9 +373,7 @@ class LuasManager extends LocalStorage
         for station in @luasStations
             if requestedStation.key is station.key
                 status = station
-        @log "[LuasManager] stationIsValid result: " + status
         status
-
 
     refreshForecast: () ->
         @forecastData = null

@@ -4,7 +4,7 @@
 
 	<!--
 		Don't waste your time trying to decypher minified javascript.
-		Sources are here:
+		Sources are here: https://github.com/amorroxic/DublinCommuter
 	-->
 
     <head>
@@ -70,17 +70,16 @@
         <section>
             <div class="row forecast">
                 <div class="twelve columns">
-                    <span>{{ 'status: '+ dublinCommuter.luasManager.hasForecast() }}</span>
                     <span class="icon-forecast icon-rainy"></span><span class="temperature">19&deg;</span>
                 </div>
             </div>
             <div class="row luas">
                 <div class="twelve columns">
                     <div class="schedule" ng-hide='dublinCommuter.luasManager.hasForecast()'><span class="icon-clock"></span><span class="details">No inbound forecast</span></div>
-                    <div class="schedule" ng-show='dublinCommuter.luasManager.hasForecast()'><span class="icon-clock"></span><span class="details">1 dsadas</span></div>
+                    <div class="schedule" ng-show='dublinCommuter.luasManager.hasForecast()' ng-repeat='inbound in dublinCommuter.luasManager.forecastData.inbound'><span class="icon-clock"></span><span class="details"><span class="red">{{inbound.time | timeformat }}</span> {{inbound.location}}</span></div>
                     <div class="current-time">12:33</div>
                     <div class="schedule" ng-hide='dublinCommuter.luasManager.hasForecast()'><span class="icon-clock"></span><span class="details">No outbound forecast</span></div>
-                    <div class="schedule" ng-show='dublinCommuter.luasManager.hasForecast()'><span class="icon-clock"></span><span class="details">1 Minute Brides Glen</span></div>
+                    <div class="schedule" ng-show='dublinCommuter.luasManager.hasForecast()' ng-repeat='inbound in dublinCommuter.luasManager.forecastData.outbound'><span class="icon-clock"></span><span class="details"><span class="red">{{inbound.time | timeformat }}</span> {{inbound.location}}</span></div>
                 </div>
             </div>
         </section>

@@ -46,6 +46,21 @@
     return factoryObject;
   });
 
+  app.filter('timeformat', function() {
+    var filterFunction;
+    filterFunction = function(input, param) {
+      var returnValue;
+      returnValue = '';
+      if (isFinite(input)) {
+        returnValue = input + (input === 1 ? ' minute' : ' minutes');
+      } else {
+        returnValue = input;
+      }
+      return returnValue;
+    };
+    return filterFunction;
+  });
+
   app.controller("DublinCommuterController", function($scope, dublinLuasFactory) {
     var dublinCommuterPromise;
     dublinCommuterPromise = dublinLuasFactory.getApplicationPromise();
@@ -1296,7 +1311,6 @@
           status = station;
         }
       }
-      this.log("[LuasManager] stationIsValid result: " + status);
       return status;
     };
 
@@ -1432,7 +1446,7 @@
   DublinCommuter = (function(_super) {
     __extends(DublinCommuter, _super);
 
-    DublinCommuter.LUAS_STATUS = 'somethings_happening_with_the_data_here';
+    DublinCommuter.STATUS_CHANGE_EVENT = 'somethings_happening_with_the_data_here';
 
     DublinCommuter.luasManager = null;
 
@@ -1487,14 +1501,21 @@
     };
 
     DublinCommuter.prototype.handleLuasForecastSuccess = function(data) {
+      console.log(this.luasManager.forecastData);
       return this.emitEvent(DublinCommuter.LUAS_STATUS, [this]);
     };
 
-    DublinCommuter.prototype.handleLuasForecastFailure = function(data) {};
+    DublinCommuter.prototype.handleLuasForecastFailure = function(data) {
+      return data;
+    };
 
-    DublinCommuter.prototype.handleWeatherForecastSuccess = function(data) {};
+    DublinCommuter.prototype.handleWeatherForecastSuccess = function(data) {
+      return data;
+    };
 
-    DublinCommuter.prototype.handleWeatherForecastFailed = function(data) {};
+    DublinCommuter.prototype.handleWeatherForecastFailed = function(data) {
+      return data;
+    };
 
     return DublinCommuter;
 

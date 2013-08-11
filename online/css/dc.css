@@ -1481,6 +1481,9 @@ nav {
   margin: 0.625em 0;
   font-size: 2em; }
 
+.red {
+  color: red; }
+
 h1.heading {
   margin: 0.125em 0; }
 

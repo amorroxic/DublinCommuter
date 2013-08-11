@@ -1,6 +1,6 @@
 class DublinCommuter extends LocalStorage
 
-    @LUAS_STATUS    = 'somethings_happening_with_the_data_here'
+    @STATUS_CHANGE_EVENT = 'somethings_happening_with_the_data_here'
 
     @luasManager        = null
     @weatherManager     = null
@@ -62,13 +62,17 @@ class DublinCommuter extends LocalStorage
         @emitEvent DublinCommuter.LUAS_STATUS, [@]
 
     handleLuasForecastSuccess: (data) =>
+        console.log @luasManager.forecastData
         @emitEvent DublinCommuter.LUAS_STATUS, [@]
 
     handleLuasForecastFailure: (data) =>
+        data
 
     handleWeatherForecastSuccess: (data) =>
+        data
 
     handleWeatherForecastFailed: (data) =>
+        data
 
 
     #run: () ->
