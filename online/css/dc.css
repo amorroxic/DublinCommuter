@@ -1462,33 +1462,76 @@ h1 {
 
 nav {
   font-size: 1.125em; }
+  nav span {
+    font-size: 0.875em;
+    color: #444444; }
 
-.temperature {
-  font-size: 2em;
+.weather {
+  font-size: 1.5em;
   text-transform: uppercase;
   color: #eb27a8;
-  margin-left: 0.3125em; }
+  float: left;
+  margin-top: 0.0625em; }
+
+.now {
+  clear: both;
+  width: 100%; }
+
+.currentdate {
+  text-transform: uppercase;
+  font-size: 0.75em;
+  text-align: center;
+  width: 6.25em;
+  float: left;
+  border-right: 0.1875em solid black;
+  border-left: 0.1875em solid black;
+  margin: 0 1.25em; }
+  .currentdate div.day {
+    width: 100%;
+    font-size: 1.5em; }
+  .currentdate div.month {
+    display: block;
+    width: 100%;
+    font-size: 1em; }
 
 .icon-forecast {
-  font-size: 2em; }
+  font-size: 0.875em;
+  color: black;
+  margin-top: -emCalc(20px); }
+
+.temperature {
+  margin-left: 0.1875em; }
 
 .schedule {
   text-transform: uppercase;
   font-size: 0.8125em; }
 
 .current-time {
+  float: left;
   color: #eb27a8;
-  margin: 0.625em 0;
-  font-size: 2em; }
+  font-size: 1.5em;
+  margin-top: 0.125em; }
+
+.now {
+  margin: 0.625em 0; }
 
 .red {
   color: red; }
+
+.current {
+  text-transform: uppercase;
+  color: #eb27a8;
+  font-size: 1.5em; }
+
+.row h1.heading {
+  font-size: 1.5em;
+  margin: 0.625em 0; }
 
 h1.heading {
   margin: 0.125em 0; }
 
 section {
-  margin-top: 2.5em; }
+  margin-top: 1.25em; }
 
 .schedule {
   margin: 0.625em 0; }

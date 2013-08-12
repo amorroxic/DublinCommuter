@@ -24,7 +24,7 @@ class LuasManager extends LocalStorage
             latitude:   params.latitude
             longitude:  params.longitude
 
-        @luasAPI            = "http://api.dublin.io/api/v1/luas-forecast/for/"
+        @luasAPI            = BaseFunctionality.API_ENDPOINT + "/luas-forecast/for/"
 
         @luasStations = [
           key: "st-stephens-green"

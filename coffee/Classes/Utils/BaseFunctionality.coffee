@@ -1,5 +1,7 @@
 class BaseFunctionality extends EventEmitter
 
+    @API_ENDPOINT = 'http://api.dublin.io/api/v1'
+
     settings =
         debug: false
 

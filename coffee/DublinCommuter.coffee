@@ -25,7 +25,7 @@ class DublinCommuter extends LocalStorage
         @weatherManager.addListener ForecastManager.FORECAST_SUCCESS, @handleWeatherForecastSuccess
         @weatherManager.addListener ForecastManager.FORECAST_FAILED, @handleWeatherForecastFailed
 
-        @offsiteMenu = new OffsiteMenu '#one-container-to-rule-them-all'
+        #@offsiteMenu = new OffsiteMenu '#one-container-to-rule-them-all'
 
 
         #@cities = new Cities
@@ -55,8 +55,9 @@ class DublinCommuter extends LocalStorage
         @emitEvent DublinCommuter.STATUS_CHANGE_EVENT, [@]
 
     handleLuasStationUnknown: (data) =>
-        @emitEvent DublinCommuter.STATUS_CHANGE_EVENT, [@]
-        @luasManager.setStation data[0]
+        #console.log data
+        @luasManager.setStation data[1]
+        #@emitEvent DublinCommuter.STATUS_CHANGE_EVENT, [@]
 
     handleLuasSystemDown: () =>
         @emitEvent DublinCommuter.STATUS_CHANGE_EVENT, [@]

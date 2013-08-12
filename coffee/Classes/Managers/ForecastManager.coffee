@@ -26,21 +26,15 @@ class ForecastManager extends LocalStorage
 
         @hasForecast        = no
         @forecast           = {}
-        @weatherAPI         = 'http://api.dublin.io/api/v1/weather/for'
-
-        @log "[Forecast] new"
+        @weatherAPI         = BaseFunctionality.API_ENDPOINT + '/weather/for'
 
     populate: () ->
-        @log "[Forecast] populate"
         isInitialized       = do @cacheLoad
         if isInitialized
             @emitEvent ForecastManager.FORECAST_SUCCESS, [@forecast]
-        @log "[Forecast] populate result: " + isInitialized
-
 
     # trying to load forecast from cache and validate it
     cacheLoad: () ->
-        @log "[Forecast] cacheLoad " + @id
         @hasForecast = no
         data = @retrieve @id
         if data?
@@ -54,12 +48,10 @@ class ForecastManager extends LocalStorage
         else
             do @refreshForecast
 
-        @log "[Forecast] cacheLoad result: " + @hasForecast
         @hasForecast
 
 
     refreshForecast: () ->
-        @log "[Forecast] refreshForecast"
         endPoint = @weatherAPI + '/' + @coordinates.latitude + ',' + @coordinates.longitude
         @log endPoint
         request = new Ajax endPoint
@@ -69,7 +61,6 @@ class ForecastManager extends LocalStorage
         request.perform params, 'json'
 
     forecastSuccess: (transport) =>
-        @log "[Forecast] forecastSuccess"
         if transport.result['status']
             @populateForecast transport.result.data
             @hasForecast = yes
@@ -79,11 +70,9 @@ class ForecastManager extends LocalStorage
             @emitEvent ForecastManager.FORECAST_FAILED, [@]
 
     forecastFailure: (data) =>
-        @log "[Forecast] forecastFailure"
         @emitEvent ForecastManager.FORECAST_FAILED, [@]
 
     populateForecast: (data) ->
-        @log "[Forecast] populateForecast"
 
         currentTime = data.time
         currentDate = new Date currentTime*1000
@@ -99,8 +88,6 @@ class ForecastManager extends LocalStorage
 
         @forecast.current   = currentForecast
         @forecast.days      = {}
-
-        @log "[Forecast] populateForecast result: " + @forecast
 
         #for dayforecast in data.weather
 
@@ -127,7 +114,6 @@ class ForecastManager extends LocalStorage
             #newForecast = null
 
     hasValidForecast: () ->
-        @log "[Forecast] hasValidForecast"
         status = no
         currentDateKey = new Date
         currentDateKey = do currentDateKey.yyyymmddh
@@ -145,7 +131,6 @@ class ForecastManager extends LocalStorage
         contentText
 
     cacheSave: () ->
-        @log "[Forecast] cacheSave " + @id
         saved = no
         data =
             forecast: @forecast
@@ -154,13 +139,11 @@ class ForecastManager extends LocalStorage
         saved
 
     destroy: () ->
-        @log "[Forecast] destroy " + @id
         @remove @id
         @hasForecast = no
         @forecast = {}
 
     celsius: (f) ->
-        @log "[Forecast] celsius from: " + f
         c = null
         if f?
             c = (f-32)*5/9

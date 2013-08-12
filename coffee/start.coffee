@@ -13,6 +13,7 @@ app.factory "dublinLuasFactory", ($q, $rootScope, safeApply) ->
 
     dublinCommuter = new DublinCommuter
     dublinCommuter.addListener DublinCommuter.STATUS_CHANGE_EVENT, (dublinCommuterInstance) ->
+        console.log "event"
         safeApply $rootScope, ->
         #$rootScope.$apply ->
             deferred.resolve dublinCommuterInstance
@@ -21,6 +22,8 @@ app.factory "dublinLuasFactory", ($q, $rootScope, safeApply) ->
     factoryObject = {}
     factoryObject.getApplicationPromise = ()->
         deferred.promise
+    factoryObject.getApplication = ()->
+        dublinCommuter
 
     do dublinCommuter.run
     factoryObject
@@ -40,9 +43,25 @@ app.factory "safeApply", ($rootScope) ->
 
     factoryObject
 
+app.factory "dublinTimingFactory", ($q, $rootScope, safeApply, dublinLuasFactory) ->
+
+    deferred = do $q.defer
+
+    timerInstance = new Timer 1000
+    timerInstance.addListener Timer.TICK, () ->
+        if do timerInstance.isNewMinute then do dublinLuasFactory.getApplication().luasManager.refreshForecast
+        safeApply $rootScope, ->
+            deferred.resolve timerInstance
+
+    factoryObject = {}
+    factoryObject.getTimerPromise = ()->
+        deferred.promise
+
+    factoryObject
+
+
 app.filter 'timeformat', () ->
     filterFunction = (input, param) ->
-        console.log input
         returnValue = ''
         if isFinite input
             returnValue = input + (if parseInt input == 1 then ' minute' else ' minutes')
@@ -51,13 +70,17 @@ app.filter 'timeformat', () ->
         returnValue
     filterFunction
 
-app.controller "DublinCommuterController", ($scope, dublinLuasFactory) ->
+app.controller "DublinCommuterController", ($scope, dublinLuasFactory, dublinTimingFactory) ->
 
     dublinCommuterPromise = do dublinLuasFactory.getApplicationPromise
     dublinCommuterPromise.then (dublinCommuter)->
             $scope.dublinCommuter = dublinCommuter
     , (status) ->
         console.log 'promise rejected because: ' + status
+
+    dublinTimerPromise = do dublinTimingFactory.getTimerPromise
+    dublinTimerPromise.then (timerInstance)->
+            $scope.timerInstance = timerInstance
 
     $scope.dublinCommuter = no
 
