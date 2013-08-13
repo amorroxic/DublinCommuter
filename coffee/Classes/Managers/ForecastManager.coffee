@@ -3,7 +3,7 @@ class ForecastManager extends LocalStorage
     @location           = null
     @coordinates        = null
     @forecast           = null
-    @hasForecast        = null
+    @_hasForecast       = null
 
     @weatherAPI         = null
     @apiKey             = null
@@ -19,12 +19,15 @@ class ForecastManager extends LocalStorage
     #   name: location name
     # }
     constructor: (params) ->
-        @id                 = 'forecast-data'
-        @coordinates        =
-            latitude:   params.latitude
-            longitude:  params.longitude
 
-        @hasForecast        = no
+        @id                 = 'forecast-data'
+        if params? and params.latitude? and params.longitude?
+            @coordinates        =
+                latitude:   params.latitude
+                longitude:  params.longitude
+                initialized: yes
+
+        @_hasForecast       = no
         @forecast           = {}
         @weatherAPI         = BaseFunctionality.API_ENDPOINT + '/weather/for'
 
@@ -35,35 +38,43 @@ class ForecastManager extends LocalStorage
 
     # trying to load forecast from cache and validate it
     cacheLoad: () ->
-        @hasForecast = no
-        data = @retrieve @id
-        if data?
-            if data.forecast? and data.forecast.current?
-                @forecast = data.forecast
-                validForecast = do @hasValidForecast
-                if validForecast
-                    @hasForecast = yes
-                else
-                    do @refreshForecast
-        else
-            do @refreshForecast
+        @_hasForecast = no
+        if @coordinates and @coordinates.initialized?
+            data = @retrieve @id
+            if data?
+                if data.forecast? and data.forecast.current?
+                    @forecast = data.forecast
+                    validForecast = do @hasValidForecast
+                    if validForecast
+                        @_hasForecast = yes
+        @_hasForecast
 
-        @hasForecast
-
+    setCoordinates: (params) ->
+        if params? and params.latitude? and params.longitude?
+            @coordinates =
+                latitude: params.latitude
+                longitude: params.longitude
+                initialized: yes
+            isInitialized = do @cacheLoad
+            if isInitialized
+                @emitEvent ForecastManager.FORECAST_SUCCESS, [@forecast]
+            else
+                do @refreshForecast
 
     refreshForecast: () ->
-        endPoint = @weatherAPI + '/' + @coordinates.latitude + ',' + @coordinates.longitude
-        @log endPoint
-        request = new Ajax endPoint
-        request.addListener Ajax.LOAD_SUCCESS, @forecastSuccess
-        request.addListener Ajax.LOAD_FAILED, @forecastFailure
-        params = {}
-        request.perform params, 'json'
+        if @coordinates and @coordinates.initialized?
+            endPoint = @weatherAPI + '/' + @coordinates.latitude + ',' + @coordinates.longitude
+            @log endPoint
+            request = new Ajax endPoint
+            request.addListener Ajax.LOAD_SUCCESS, @forecastSuccess
+            request.addListener Ajax.LOAD_FAILED, @forecastFailure
+            params = {}
+            request.perform params, 'json'
 
     forecastSuccess: (transport) =>
         if transport.result['status']
             @populateForecast transport.result.data
-            @hasForecast = yes
+            @_hasForecast = yes
             do @cacheSave
             @emitEvent ForecastManager.FORECAST_SUCCESS, [@forecast]
         else
@@ -83,11 +94,12 @@ class ForecastManager extends LocalStorage
             'timestamp'     : data.time,
             'summary'       : data.summary,
             'icon'          : data.icon,
-            'temp'          : data.temp
+            'temp'          : parseInt(data.temp)
         }
 
-        @forecast.current   = currentForecast
-        @forecast.days      = {}
+        @forecast.current       = currentForecast
+        @forecast.coordinates   = @coordinates
+        @forecast.days          = {}
 
         #for dayforecast in data.weather
 
@@ -140,7 +152,7 @@ class ForecastManager extends LocalStorage
 
     destroy: () ->
         @remove @id
-        @hasForecast = no
+        @_hasForecast = no
         @forecast = {}
 
     celsius: (f) ->
@@ -150,4 +162,8 @@ class ForecastManager extends LocalStorage
             c = Math.round(c)
         @log c
         c
+
+    hasForecast: () ->
+        @_hasForecast
+
 

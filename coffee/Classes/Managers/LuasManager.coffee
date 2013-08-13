@@ -20,9 +20,12 @@ class LuasManager extends LocalStorage
         @id                 = 'luas-data'
         @_hasForecast       = no
         @_hasLuas           = no
-        @coordinates        =
-            latitude:   params.latitude
-            longitude:  params.longitude
+        if params? and params.latitude? and params.longitude?
+            @coordinates        =
+                latitude:   params.latitude
+                longitude:  params.longitude
+        else
+            @coordinates    = no
 
         @luasAPI            = BaseFunctionality.API_ENDPOINT + "/luas-forecast/for/"
 
@@ -309,8 +312,10 @@ class LuasManager extends LocalStorage
 
     buildSuggestions: () =>
         suggestions = []
-        if @coordinates.latitude? and @coordinates.longitude?
+        if @coordinates? and @coordinates.latitude? and @coordinates.longitude?
             suggestions = do @sortStationsByGPSDistance
+        else
+            suggestions = @luasStations.slice 0
         suggestions
 
     sortStationsByGPSDistance: () ->
@@ -350,9 +355,11 @@ class LuasManager extends LocalStorage
         status = no
         if station? and station.latitude? and station.longitude? and station.key?
             @currentStation = station
-            @coordinates.latitude = station.latitude
-            @coordinates.longitude = station.longitude
+            @coordinates =
+                latitude: station.latitude
+                longitude: station.longitude
             do @cacheSave
+            @_hasLuas = yes
             do @refreshForecast
             status = yes
         status
@@ -378,12 +385,13 @@ class LuasManager extends LocalStorage
     refreshForecast: () ->
         @forecastData = null
         @_hasForecast = no
-        endPoint = @luasAPI + @currentStation.key
-        request = new Ajax endPoint
-        request.addListener Ajax.LOAD_SUCCESS, @forecastSuccess
-        request.addListener Ajax.LOAD_FAILED, @forecastFailure
-        params = {}
-        request.perform params,'json'
+        if @currentStation?
+            endPoint = @luasAPI + @currentStation.key
+            request = new Ajax endPoint
+            request.addListener Ajax.LOAD_SUCCESS, @forecastSuccess
+            request.addListener Ajax.LOAD_FAILED, @forecastFailure
+            params = {}
+            request.perform params,'json'
 
     forecastSuccess: (transport) =>
         if transport.result.status

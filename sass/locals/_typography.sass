@@ -75,4 +75,27 @@ nav
 
 .row h1.heading
     font-size: emCalc(24px)
-    margin: emCalc(10px) 0
+    margin: emCalc(20px) 0 emCalc(20px) 0
+
+.dimmed
+    color: #ccc
+
+ul.sostyled
+    list-style-type: none
+    padding: 0
+    margin: 0
+
+ul.sostyled
+    li
+        border-bottom: emCalc(2px) solid #a8d2e9
+        margin: 0
+        text-transform: uppercase
+        font-size: emCalc(14px)
+        padding: emCalc(5px) 0 0 emCalc(10px)
+        height: emCalc(40px)
+        +gradient(#97b5c8,#769eb3)
+        &:hover
+            +gradient(#769eb3,#769eb3)
+        span.option
+            margin-left: emCalc(5px)
+

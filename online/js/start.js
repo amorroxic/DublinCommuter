@@ -14,7 +14,6 @@
     deferred = $q.defer();
     dublinCommuter = new DublinCommuter;
     dublinCommuter.addListener(DublinCommuter.STATUS_CHANGE_EVENT, function(dublinCommuterInstance) {
-      console.log("event");
       return safeApply($rootScope, function() {
         return deferred.resolve(dublinCommuterInstance);
       });
@@ -96,7 +95,16 @@
     dublinTimerPromise.then(function(timerInstance) {
       return $scope.timerInstance = timerInstance;
     });
-    return $scope.dublinCommuter = false;
+    $scope.weatherIconClass = 'icon-forecast';
+    if (dublinLuasFactory.getApplication().weatherManager.hasForecast()) {
+      $scope.weatherIconClass += ' ' + dublinLuasFactory.getApplication().weatherManager.forecast.current.icon;
+      console.log("scope: " + $scope.weatherIconClass);
+    }
+    $scope.$weatherIcon = 'partly-cloudy-night';
+    $scope.dublinCommuter = false;
+    return $scope.stationClicked = function(station) {
+      return dublinLuasFactory.getApplication().luasManager.setStation(station);
+    };
   });
 
   /* --------------------------------------------
@@ -787,7 +795,7 @@
 
     ForecastManager.forecast = null;
 
-    ForecastManager.hasForecast = null;
+    ForecastManager._hasForecast = null;
 
     ForecastManager.weatherAPI = null;
 
@@ -801,11 +809,14 @@
       this.forecastFailure = __bind(this.forecastFailure, this);
       this.forecastSuccess = __bind(this.forecastSuccess, this);
       this.id = 'forecast-data';
-      this.coordinates = {
-        latitude: params.latitude,
-        longitude: params.longitude
-      };
-      this.hasForecast = false;
+      if ((params != null) && (params.latitude != null) && (params.longitude != null)) {
+        this.coordinates = {
+          latitude: params.latitude,
+          longitude: params.longitude,
+          initialized: true
+        };
+      }
+      this._hasForecast = false;
       this.forecast = {};
       this.weatherAPI = BaseFunctionality.API_ENDPOINT + '/weather/for';
     }
@@ -820,39 +831,56 @@
 
     ForecastManager.prototype.cacheLoad = function() {
       var data, validForecast;
-      this.hasForecast = false;
-      data = this.retrieve(this.id);
-      if (data != null) {
-        if ((data.forecast != null) && (data.forecast.current != null)) {
-          this.forecast = data.forecast;
-          validForecast = this.hasValidForecast();
-          if (validForecast) {
-            this.hasForecast = true;
-          } else {
-            this.refreshForecast();
+      this._hasForecast = false;
+      if (this.coordinates && (this.coordinates.initialized != null)) {
+        data = this.retrieve(this.id);
+        if (data != null) {
+          if ((data.forecast != null) && (data.forecast.current != null)) {
+            this.forecast = data.forecast;
+            validForecast = this.hasValidForecast();
+            if (validForecast) {
+              this._hasForecast = true;
+            }
           }
         }
-      } else {
-        this.refreshForecast();
       }
-      return this.hasForecast;
+      return this._hasForecast;
+    };
+
+    ForecastManager.prototype.setCoordinates = function(params) {
+      var isInitialized;
+      if ((params != null) && (params.latitude != null) && (params.longitude != null)) {
+        this.coordinates = {
+          latitude: params.latitude,
+          longitude: params.longitude,
+          initialized: true
+        };
+        isInitialized = this.cacheLoad();
+        if (isInitialized) {
+          return this.emitEvent(ForecastManager.FORECAST_SUCCESS, [this.forecast]);
+        } else {
+          return this.refreshForecast();
+        }
+      }
     };
 
     ForecastManager.prototype.refreshForecast = function() {
       var endPoint, params, request;
-      endPoint = this.weatherAPI + '/' + this.coordinates.latitude + ',' + this.coordinates.longitude;
-      this.log(endPoint);
-      request = new Ajax(endPoint);
-      request.addListener(Ajax.LOAD_SUCCESS, this.forecastSuccess);
-      request.addListener(Ajax.LOAD_FAILED, this.forecastFailure);
-      params = {};
-      return request.perform(params, 'json');
+      if (this.coordinates && (this.coordinates.initialized != null)) {
+        endPoint = this.weatherAPI + '/' + this.coordinates.latitude + ',' + this.coordinates.longitude;
+        this.log(endPoint);
+        request = new Ajax(endPoint);
+        request.addListener(Ajax.LOAD_SUCCESS, this.forecastSuccess);
+        request.addListener(Ajax.LOAD_FAILED, this.forecastFailure);
+        params = {};
+        return request.perform(params, 'json');
+      }
     };
 
     ForecastManager.prototype.forecastSuccess = function(transport) {
       if (transport.result['status']) {
         this.populateForecast(transport.result.data);
-        this.hasForecast = true;
+        this._hasForecast = true;
         this.cacheSave();
         return this.emitEvent(ForecastManager.FORECAST_SUCCESS, [this.forecast]);
       } else {
@@ -874,9 +902,10 @@
         'timestamp': data.time,
         'summary': data.summary,
         'icon': data.icon,
-        'temp': data.temp
+        'temp': parseInt(data.temp)
       };
       this.forecast.current = currentForecast;
+      this.forecast.coordinates = this.coordinates;
       return this.forecast.days = {};
     };
 
@@ -917,7 +946,7 @@
 
     ForecastManager.prototype.destroy = function() {
       this.remove(this.id);
-      this.hasForecast = false;
+      this._hasForecast = false;
       return this.forecast = {};
     };
 
@@ -930,6 +959,10 @@
       }
       this.log(c);
       return c;
+    };
+
+    ForecastManager.prototype.hasForecast = function() {
+      return this._hasForecast;
     };
 
     return ForecastManager;
@@ -976,10 +1009,14 @@
       this.id = 'luas-data';
       this._hasForecast = false;
       this._hasLuas = false;
-      this.coordinates = {
-        latitude: params.latitude,
-        longitude: params.longitude
-      };
+      if ((params != null) && (params.latitude != null) && (params.longitude != null)) {
+        this.coordinates = {
+          latitude: params.latitude,
+          longitude: params.longitude
+        };
+      } else {
+        this.coordinates = false;
+      }
       this.luasAPI = BaseFunctionality.API_ENDPOINT + "/luas-forecast/for/";
       this.luasStations = [
         {
@@ -1271,8 +1308,10 @@
     LuasManager.prototype.buildSuggestions = function() {
       var suggestions;
       suggestions = [];
-      if ((this.coordinates.latitude != null) && (this.coordinates.longitude != null)) {
+      if ((this.coordinates != null) && (this.coordinates.latitude != null) && (this.coordinates.longitude != null)) {
         suggestions = this.sortStationsByGPSDistance();
+      } else {
+        suggestions = this.luasStations.slice(0);
       }
       return suggestions;
     };
@@ -1324,9 +1363,12 @@
       status = false;
       if ((station != null) && (station.latitude != null) && (station.longitude != null) && (station.key != null)) {
         this.currentStation = station;
-        this.coordinates.latitude = station.latitude;
-        this.coordinates.longitude = station.longitude;
+        this.coordinates = {
+          latitude: station.latitude,
+          longitude: station.longitude
+        };
         this.cacheSave();
+        this._hasLuas = true;
         this.refreshForecast();
         status = true;
       }
@@ -1366,12 +1408,14 @@
       var endPoint, params, request;
       this.forecastData = null;
       this._hasForecast = false;
-      endPoint = this.luasAPI + this.currentStation.key;
-      request = new Ajax(endPoint);
-      request.addListener(Ajax.LOAD_SUCCESS, this.forecastSuccess);
-      request.addListener(Ajax.LOAD_FAILED, this.forecastFailure);
-      params = {};
-      return request.perform(params, 'json');
+      if (this.currentStation != null) {
+        endPoint = this.luasAPI + this.currentStation.key;
+        request = new Ajax(endPoint);
+        request.addListener(Ajax.LOAD_SUCCESS, this.forecastSuccess);
+        request.addListener(Ajax.LOAD_FAILED, this.forecastFailure);
+        params = {};
+        return request.perform(params, 'json');
+      }
     };
 
     LuasManager.prototype.forecastSuccess = function(transport) {
@@ -1519,13 +1563,13 @@
         latitude: 53.309839,
         longitude: -6.25174
       };
-      this.luasManager = new LuasManager(params);
+      this.luasManager = new LuasManager;
       this.luasManager.addListener(LuasManager.STATION_FOUND, this.handleLuasStationFound);
       this.luasManager.addListener(LuasManager.STATION_UNKNOWN, this.handleLuasStationUnknown);
       this.luasManager.addListener(LuasManager.SYSTEM_DOWN, this.handleLuasSystemDown);
       this.luasManager.addListener(LuasManager.FORECAST_SUCCESS, this.handleLuasForecastSuccess);
       this.luasManager.addListener(LuasManager.FORECAST_FAILED, this.handleLuasForecastFailure);
-      this.weatherManager = new ForecastManager(params);
+      this.weatherManager = new ForecastManager;
       this.weatherManager.addListener(ForecastManager.FORECAST_SUCCESS, this.handleWeatherForecastSuccess);
       return this.weatherManager.addListener(ForecastManager.FORECAST_FAILED, this.handleWeatherForecastFailed);
     };
@@ -1535,12 +1579,12 @@
       return this.weatherManager.populate();
     };
 
-    DublinCommuter.prototype.handleLuasStationFound = function(data) {
+    DublinCommuter.prototype.handleLuasStationFound = function(station) {
       return this.emitEvent(DublinCommuter.STATUS_CHANGE_EVENT, [this]);
     };
 
     DublinCommuter.prototype.handleLuasStationUnknown = function(data) {
-      return this.luasManager.setStation(data[1]);
+      return this.emitEvent(DublinCommuter.STATUS_CHANGE_EVENT, [this]);
     };
 
     DublinCommuter.prototype.handleLuasSystemDown = function() {
@@ -1548,6 +1592,7 @@
     };
 
     DublinCommuter.prototype.handleLuasForecastSuccess = function(data) {
+      this.weatherManager.setCoordinates(this.luasManager.currentStation);
       return this.emitEvent(DublinCommuter.STATUS_CHANGE_EVENT, [this]);
     };
 
@@ -1556,7 +1601,7 @@
     };
 
     DublinCommuter.prototype.handleWeatherForecastSuccess = function(data) {
-      return data;
+      return this.emitEvent(DublinCommuter.STATUS_CHANGE_EVENT, [this]);
     };
 
     DublinCommuter.prototype.handleWeatherForecastFailed = function(data) {

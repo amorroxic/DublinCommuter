@@ -38,17 +38,6 @@
 
     <body data-ng-controller="DublinCommuterController">
 
-
-    <section class="menymenu" data-ng-cloak style="display:none">
-        <h4>
-            Navigation
-            <a href="#0" id="effeckt-off-screen-nav-close" class="effeckt-off-screen-nav-close">×</a>
-        </h4>
-        <ul>
-            <li data-ng-repeat="station in dublinCommuter.luasManager.buildSuggestions()"><a href="#0">{{station.name}}</a></li>
-        </ul>
-    </section>
-
     <div class="pagecontainer">
 		<header>
             <div class="row">
@@ -58,16 +47,27 @@
                 <div class="twelve columns now" data-ng-cloak>
                     <div class="current-time">{{timerInstance.currentDate | date: 'HH:mm'}}</div>
                     <div class="currentdate"><div class="day">{{timerInstance.currentDate | date: 'dd'}}</div><div class="month">{{timerInstance.currentDate | date: 'MMMM'}}</div></div>
-                    <div class="weather">
-                        <span class="icon-forecast icon-rainy"></span>
-                        <span class="temperature">19&deg;</span>
+                    <div class="weather" ng-show="dublinCommuter.weatherManager.hasForecast()">
+                        <span ng-class="{'icon-forecast':true, $weatherIcon: dublinCommuter.weatherManager.hasForecast()}"></span>
+                        <span class="temperature">{{dublinCommuter.weatherManager.forecast.current.temp}}&deg;</span>
                     </div>
                 </div>
+
             </div>
 		</header>
 
+        <section ng-hide="dublinCommuter.luasManager.hasLuas()">
+            <div class="row">
+                <div class="twelve columns">
+                    <ul class="sostyled">
+                        <li data-ng-repeat="station in dublinCommuter.luasManager.buildSuggestions()" ng-click="stationClicked(station)"><span class="icon-chevron-sign-right"></span><span class="option">{{station.name}}</span></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
 
-        <section data-ng-cloak>
+
+        <section data-ng-cloak ng-show="dublinCommuter.luasManager.hasLuas()">
             <div class="row forecast">
                 <div class="twelve columns">
                 </div>
@@ -85,8 +85,12 @@
                     <div class="schedule" data-ng-show='dublinCommuter.luasManager.hasForecast()' data-ng-repeat='inbound in dublinCommuter.luasManager.forecastData.outbound'><span class="icon-clock"></span><span class="details">{{inbound.time | timeformat }} {{inbound.location}}</span></div>
                 </div>
             </div>
+            <div class="row luas">
+                <div class="twelve columns">
+                    <div class="schedule"><span class="dimmed">Auto refresh in {{60-timerInstance.currentDate.getSeconds()}} seconds</span></div>
+                </div>
+            </div>
         </section>
-    </div>
 
         <!-- Load local Zepto.js or (as a fallback) jQuery from Google CDN or (as a fallback) local jQuery -->
         <script>

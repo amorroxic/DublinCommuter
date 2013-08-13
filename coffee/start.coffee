@@ -13,7 +13,6 @@ app.factory "dublinLuasFactory", ($q, $rootScope, safeApply) ->
 
     dublinCommuter = new DublinCommuter
     dublinCommuter.addListener DublinCommuter.STATUS_CHANGE_EVENT, (dublinCommuterInstance) ->
-        console.log "event"
         safeApply $rootScope, ->
         #$rootScope.$apply ->
             deferred.resolve dublinCommuterInstance
@@ -82,5 +81,13 @@ app.controller "DublinCommuterController", ($scope, dublinLuasFactory, dublinTim
     dublinTimerPromise.then (timerInstance)->
             $scope.timerInstance = timerInstance
 
+    $scope.weatherIconClass = 'icon-forecast'
+    if do dublinLuasFactory.getApplication().weatherManager.hasForecast
+        $scope.weatherIconClass += ' ' + dublinLuasFactory.getApplication().weatherManager.forecast.current.icon
+        console.log "scope: "+$scope.weatherIconClass
+
+    $scope.$weatherIcon = 'partly-cloudy-night'
     $scope.dublinCommuter = no
+    $scope.stationClicked = (station) ->
+        dublinLuasFactory.getApplication().luasManager.setStation station
 
