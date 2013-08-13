@@ -1583,7 +1583,7 @@ section {
   font-weight: normal;
   font-style: normal; }
 
-.icon-thermometer-empty, .icon-thermometer-low, .icon-thermometer-medium-low, .icon-thermometer-medium-high, .icon-thermometer-high, .icon-thermometer-full, .icon-degrees-c, .icon-degrees-f, .icon-umbrella, .icon-cloud-rain, .icon-sun, .icon-rainy, .icon-windy, .icon-weather, .icon-snowy, .icon-cloudy, .icon-cloud, .icon-moon, .icon-cloudy-2, .icon-snowy-2, .icon-clock, .icon-github, .icon-twitter, .icon-arrow-left, .icon-arrow-down, .icon-arrow-right, .icon-arrow-up, .icon-checkbox-checked, .icon-checkbox-unchecked, .icon-radio-unchecked, .icon-radio-checked, .icon-shuffle, .icon-heart, .icon-heart-2, .icon-link, .icon-search, .icon-clock-2, .icon-mobile, .icon-screen, .icon-tablet, .icon-tv, .icon-location, .icon-tag, .icon-home, .icon-chevron-sign-left, .icon-chevron-sign-right, .icon-chevron-sign-up, .icon-chevron-sign-down, .icon-youtube, .icon-apple, .icon-windows, .icon-android, .icon-linux, .icon-desktop, .icon-lightning, .icon-windy-2, .icon-weather-2, .icon-weather-3, .icon-none, .icon-facebook, .icon-remove-circle, .icon-ok-circle, .icon-download, .icon-upload, .icon-remove, .icon-ok {
+.partly-cloudy-day, .partly-cloudy-night, .icon-thermometer-empty, .icon-thermometer-low, .icon-thermometer-medium-low, .icon-thermometer-medium-high, .icon-thermometer-high, .icon-thermometer-full, .icon-degrees-c, .icon-degrees-f, .rain, .icon-cloud-rain, .clear-day, .icon-rainy, .wind, .icon-weather, .snow, .cloudy, .icon-cloud, .clear-night, .icon-cloudy-2, .sleet, .icon-clock, .icon-github, .icon-twitter, .icon-arrow-left, .icon-arrow-down, .icon-arrow-right, .icon-arrow-up, .icon-checkbox-checked, .icon-checkbox-unchecked, .icon-radio-unchecked, .icon-radio-checked, .icon-shuffle, .icon-heart, .icon-heart-2, .icon-link, .icon-search, .icon-clock-2, .icon-mobile, .icon-screen, .icon-tablet, .icon-tv, .icon-location, .icon-tag, .icon-home, .icon-chevron-sign-left, .icon-chevron-sign-right, .icon-chevron-sign-up, .icon-chevron-sign-down, .icon-youtube, .icon-apple, .icon-windows, .icon-android, .icon-linux, .icon-desktop, .icon-lightning, .icon-windy-2, .icon-weather-2, .icon-weather-3, .icon-none, .icon-facebook, .icon-remove-circle, .icon-ok-circle, .icon-download, .icon-upload, .icon-remove, .icon-ok {
   font-family: 'icomoon';
   speak: none;
   font-style: normal;
@@ -1617,40 +1617,40 @@ section {
 .icon-degrees-f:before {
   content: "\e03f"; }
 
-.icon-umbrella:before {
+.rain2:before {
   content: "\e045"; }
 
 .icon-cloud-rain:before {
   content: "\e003"; }
 
-.icon-sun:before {
+.clear-day:before {
   content: "\e04a"; }
 
-.icon-rainy:before {
+.rain:before {
   content: "\e04b"; }
 
-.icon-windy:before {
+.wind:before {
   content: "\e04c"; }
 
 .icon-weather:before {
   content: "\e04d"; }
 
-.icon-snowy:before {
+.snow:before {
   content: "\e04f"; }
 
-.icon-cloudy:before {
+.cloudy:before {
   content: "\e04e"; }
 
-.icon-cloud:before {
+.partly-cloudy-night:before {
   content: "\e051"; }
 
-.icon-moon:before {
+.clear-night:before {
   content: "\e050"; }
 
-.icon-cloudy-2:before {
+.partly-cloudy-day:before {
   content: "\e052"; }
 
-.icon-snowy-2:before {
+.sleet:before {
   content: "\e053"; }
 
 .icon-clock:before {

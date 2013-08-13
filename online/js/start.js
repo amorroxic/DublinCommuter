@@ -100,7 +100,7 @@
       $scope.weatherIconClass += ' ' + dublinLuasFactory.getApplication().weatherManager.forecast.current.icon;
       console.log("scope: " + $scope.weatherIconClass);
     }
-    $scope.$weatherIcon = 'partly-cloudy-night';
+    $scope.$weatherIcon = 'clear-night';
     $scope.dublinCommuter = false;
     return $scope.stationClicked = function(station) {
       return dublinLuasFactory.getApplication().luasManager.setStation(station);
