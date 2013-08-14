@@ -71,7 +71,11 @@ app.filter 'timeformat', () ->
         returnValue
     filterFunction
 
-app.controller "DublinCommuterController", ($scope, dublinLuasFactory, dublinTimingFactory) ->
+#a = app.controller "DublinCommuterController"
+#console.log a
+#a.$inject = ['$scope','dublinLuasFactory','dublinTimingFactory']
+
+controller = app.controller "DublinCommuterController", ($scope, dublinLuasFactory, dublinTimingFactory) ->
 
     dublinCommuterPromise = do dublinLuasFactory.getApplicationPromise
     dublinCommuterPromise.then (dublinCommuter)->
@@ -94,4 +98,5 @@ app.controller "DublinCommuterController", ($scope, dublinLuasFactory, dublinTim
         dublinLuasFactory.getApplication().luasManager.setStation station
     $scope.chooseAnotherStation = () ->
         $scope.suggestWindowOpened = yes
+
 
