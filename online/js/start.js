@@ -72,9 +72,17 @@
     var filterFunction;
     filterFunction = function(input, param) {
       var returnValue;
-      returnValue = '';
       if (isFinite(input)) {
-        returnValue = input + (parseInt(input === 1) ? ' minute' : ' minutes');
+        switch (input) {
+          case '':
+            returnValue = input;
+            break;
+          case '1':
+            returnValue = input + ' minute';
+            break;
+          default:
+            returnValue = input + ' minutes';
+        }
       } else {
         returnValue = input;
       }
@@ -102,8 +110,11 @@
     }
     $scope.$weatherIcon = 'clear-night';
     $scope.dublinCommuter = false;
-    return $scope.stationClicked = function(station) {
+    $scope.stationClicked = function(station) {
       return dublinLuasFactory.getApplication().luasManager.setStation(station);
+    };
+    return $scope.chooseAnotherStation = function() {
+      return $scope.suggestWindowOpened = true;
     };
   });
 

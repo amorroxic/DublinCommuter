@@ -61,9 +61,11 @@ app.factory "dublinTimingFactory", ($q, $rootScope, safeApply, dublinLuasFactory
 
 app.filter 'timeformat', () ->
     filterFunction = (input, param) ->
-        returnValue = ''
         if isFinite input
-            returnValue = input + (if parseInt input == 1 then ' minute' else ' minutes')
+            switch input
+                when '' then returnValue = input
+                when '1' then returnValue = input + ' minute'
+                else returnValue = input + ' minutes'
         else
             returnValue = input
         returnValue
@@ -90,4 +92,6 @@ app.controller "DublinCommuterController", ($scope, dublinLuasFactory, dublinTim
     $scope.dublinCommuter = no
     $scope.stationClicked = (station) ->
         dublinLuasFactory.getApplication().luasManager.setStation station
+    $scope.chooseAnotherStation = () ->
+        $scope.suggestWindowOpened = yes
 
