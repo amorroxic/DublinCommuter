@@ -14,6 +14,8 @@ class DublinCommuter extends LocalStorage
             latitude    : 53.309839
             longitude   : -6.25174
 
+        do @cleanupAfterPreviousVersions
+
         @luasManager = new LuasManager
         @luasManager.addListener LuasManager.STATION_FOUND, @handleLuasStationFound
         @luasManager.addListener LuasManager.STATION_UNKNOWN, @handleLuasStationUnknown
@@ -27,26 +29,6 @@ class DublinCommuter extends LocalStorage
 
         #@offsiteMenu = new OffsiteMenu '#one-container-to-rule-them-all'
 
-
-        #@cities = new Cities
-        #@cities.addListener Cities.CITIES_NEW, @handleNewCityLoaded
-        #@cities.addListener Cities.CITIES_COMPLETE, @handleAllCitiesLoaded
-        #@cities.addListener Cities.CITIES_UPDATE, @handleCityWasRefreshed
-        #@cities.addListener Cities.CITIES_FAILURE, @handleCityRefreshError
-        #@cities.addListener Cities.CITIES_UNKNOWN, @handleCitiesIsUnknown
-
-        #@mapInstance = new Maps 'container'
-        #@mapInstance.addListener Maps.LOCATION_IS_REMOVED, @handleLocationRemovedFromMap
-
-        #@autocompleteInstance = new AutoComplete 'searchbox'
-        #@autocompleteInstance.addListener AutoComplete.AUTOCOMPLETE_QUERY, @handleAutocompleteAddCity
-        #@autocompleteInstance.addListener AutoComplete.AUTOCOMPLETE_NOTFOUND, @handleAutocompleteLocationNotFound
-        #gmapInstance = do @mapInstance.getGoogleMapsInstance
-        #@autocompleteInstance.bindToGoogleMap gmapInstance
-
-        #$('.blue-pill').bind 'click', (e) =>
-            #do @cities.coldRefreshForecasts
-
     run: () ->
         do @luasManager.populate
         do @weatherManager.populate
@@ -54,20 +36,19 @@ class DublinCommuter extends LocalStorage
     clearCurrentPreferences: () ->
         do @luasManager.destroy
         do @weatherManager.destroy
-        console.log "Dsad"
         @emitEvent DublinCommuter.STATUS_CHANGE_EVENT, [@]
 
     handleLuasStationFound: (station) =>
         @emitEvent DublinCommuter.STATUS_CHANGE_EVENT, [@]
 
     handleLuasStationUnknown: (data) =>
-        #@weatherManager.setCoordinates station
         @emitEvent DublinCommuter.STATUS_CHANGE_EVENT, [@]
 
     handleLuasSystemDown: () =>
         @emitEvent DublinCommuter.STATUS_CHANGE_EVENT, [@]
 
     handleLuasForecastSuccess: (data) =>
+        @weatherManager.cacheWeatherDataForThisStation @luasManager.currentStation.key
         @weatherManager.setCoordinates @luasManager.currentStation
         @emitEvent DublinCommuter.STATUS_CHANGE_EVENT, [@]
 
@@ -79,6 +60,9 @@ class DublinCommuter extends LocalStorage
 
     handleWeatherForecastFailed: (data) =>
         data
+
+    cleanupAfterPreviousVersions: () ->
+        @remove 'forecast-data'
 
 
     #run: () ->

@@ -832,6 +832,10 @@
       this.weatherAPI = BaseFunctionality.API_ENDPOINT + '/weather/for';
     }
 
+    ForecastManager.prototype.cacheWeatherDataForThisStation = function(cacheKey) {
+      return this.id = 'forecast-data' + '-' + cacheKey;
+    };
+
     ForecastManager.prototype.populate = function() {
       var isInitialized;
       isInitialized = this.cacheLoad();
@@ -956,7 +960,6 @@
     };
 
     ForecastManager.prototype.destroy = function() {
-      this.remove(this.id);
       this._hasForecast = false;
       this.coordinates = false;
       return this.forecast = {};
@@ -1577,6 +1580,7 @@
         latitude: 53.309839,
         longitude: -6.25174
       };
+      this.cleanupAfterPreviousVersions();
       this.luasManager = new LuasManager;
       this.luasManager.addListener(LuasManager.STATION_FOUND, this.handleLuasStationFound);
       this.luasManager.addListener(LuasManager.STATION_UNKNOWN, this.handleLuasStationUnknown);
@@ -1596,7 +1600,6 @@
     DublinCommuter.prototype.clearCurrentPreferences = function() {
       this.luasManager.destroy();
       this.weatherManager.destroy();
-      console.log("Dsad");
       return this.emitEvent(DublinCommuter.STATUS_CHANGE_EVENT, [this]);
     };
 
@@ -1613,6 +1616,7 @@
     };
 
     DublinCommuter.prototype.handleLuasForecastSuccess = function(data) {
+      this.weatherManager.cacheWeatherDataForThisStation(this.luasManager.currentStation.key);
       this.weatherManager.setCoordinates(this.luasManager.currentStation);
       return this.emitEvent(DublinCommuter.STATUS_CHANGE_EVENT, [this]);
     };
@@ -1627,6 +1631,10 @@
 
     DublinCommuter.prototype.handleWeatherForecastFailed = function(data) {
       return data;
+    };
+
+    DublinCommuter.prototype.cleanupAfterPreviousVersions = function() {
+      return this.remove('forecast-data');
     };
 
     return DublinCommuter;

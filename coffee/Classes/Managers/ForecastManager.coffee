@@ -31,6 +31,9 @@ class ForecastManager extends LocalStorage
         @forecast           = {}
         @weatherAPI         = BaseFunctionality.API_ENDPOINT + '/weather/for'
 
+    cacheWeatherDataForThisStation: (cacheKey) ->
+        @id = 'forecast-data' + '-' + cacheKey
+
     populate: () ->
         isInitialized       = do @cacheLoad
         if isInitialized
@@ -151,7 +154,8 @@ class ForecastManager extends LocalStorage
         saved
 
     destroy: () ->
-        @remove @id
+        # i think it may be actually good not to erase forecast cache.
+        #@remove @id
         @_hasForecast   = no
         @coordinates    = no
         @forecast       = {}
