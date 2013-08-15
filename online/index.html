@@ -42,7 +42,7 @@
 		<header>
             <div class="row">
                 <div class="twelve columns">
-                    <h1 class="heading">Dublin Commuter <div class="icon" data-ng-cloak ng-click="chooseAnotherStation()"><span class="icon-arrow-left"></span></div></h1>
+                    <h1 class="heading">Dublin Commuter <div class="icon" data-ng-cloak data-ng-click="chooseAnotherStation()"><span class="icon-arrow-left"></span></div></h1>
 
                 </div>
                 <div class="twelve columns now" data-ng-cloak>
@@ -90,7 +90,7 @@
             </div>
             <div class="row luas">
                 <div class="twelve columns">
-                    <div class="schedule"><span class="dimmed">Auto refresh in {{60-timerInstance.currentDate.getSeconds()}} seconds</span></div>
+                    <div class="schedule"><span class="dimmed">Auto refresh in {{60-timerInstance.currentDate.getSeconds()}} seconds.<br/>dublin.io - august 2013</span></div>
                 </div>
             </div>
         </section>
@@ -105,7 +105,7 @@
         <script>
             window.Zepto || window.jQuery || document.write('<script src="js/vendor/jquery.min.js"><\/script>');
         </script>
-		<script src="js/vendor/meny-ck.js"></script>
+		<!--script src="js/vendor/meny-ck.js"></script-->
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
 		<script src="js/start.js"></script>
 
