@@ -52,6 +52,11 @@
                         <span class="{{dublinCommuter.weatherManager.forecast.current.icon}}"></span>
                         <span class="temperature">{{dublinCommuter.weatherManager.forecast.current.temp}}&deg;</span>
                     </div>
+                    <div class="weather" ng-hide="dublinCommuter.weatherManager.hasForecast()">
+                        <span class="icon-none"></span>
+                        <span class="temperature"></span>
+                    </div>
+
                 </div>
 
             </div>
@@ -77,14 +82,14 @@
             </div>
             <div class="row luas">
                 <div class="twelve columns">
-                    <div class="schedule" data-ng-hide='dublinCommuter.luasManager.hasForecast()'><span class="icon-clock"></span><span class="details">No inbound forecast</span></div>
+                    <div class="schedule" data-ng-hide='dublinCommuter.luasManager.hasForecast()'><span class="icon-search"></span> <span class="details">Loading data</span></div>
                     <div class="schedule" data-ng-show='dublinCommuter.luasManager.hasForecast()' data-ng-repeat='inbound in dublinCommuter.luasManager.forecastData.inbound'><span class="icon-clock"></span><span class="details">{{inbound.time | timeformat }} {{inbound.location}}</span></div>
                 </div>
                 <div class="twelve columns now" data-ng-cloak data-ng-show='dublinCommuter.luasManager.hasLuas()' data-ng-cloak>
                     <div class="current"><div>{{dublinCommuter.luasManager.currentStation.name}}</div></div>
                 </div>
                 <div class="twelve columns">
-                    <div class="schedule" data-ng-hide='dublinCommuter.luasManager.hasForecast()'><span class="icon-clock"></span><span class="details">No outbound forecast</span></div>
+                    <div class="schedule" data-ng-hide='dublinCommuter.luasManager.hasForecast()'><span class="icon-search"></span> <span class="details">Loading data</span></div>
                     <div class="schedule" data-ng-show='dublinCommuter.luasManager.hasForecast()' data-ng-repeat='inbound in dublinCommuter.luasManager.forecastData.outbound'><span class="icon-clock"></span><span class="details">{{inbound.time | timeformat }} {{inbound.location}}</span></div>
                 </div>
             </div>
