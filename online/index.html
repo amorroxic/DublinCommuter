@@ -42,7 +42,8 @@
 		<header>
             <div class="row">
                 <div class="twelve columns">
-                    <h1 class="heading">Dublin Commuter</h1>
+                    <h1 class="heading">Dublin Commuter <div class="icon" ng-click="chooseAnotherStation()"><span class="icon-arrow-left"></span></div></h1>
+
                 </div>
                 <div class="twelve columns now" data-ng-cloak>
                     <div class="current-time">{{timerInstance.currentDate | date: 'HH:mm'}}</div>
@@ -80,7 +81,7 @@
                     <div class="schedule" data-ng-show='dublinCommuter.luasManager.hasForecast()' data-ng-repeat='inbound in dublinCommuter.luasManager.forecastData.inbound'><span class="icon-clock"></span><span class="details">{{inbound.time | timeformat }} {{inbound.location}}</span></div>
                 </div>
                 <div class="twelve columns now" data-ng-cloak data-ng-show='dublinCommuter.luasManager.hasLuas()' data-ng-cloak>
-                    <div class="current"><div>{{dublinCommuter.luasManager.currentStation.name}}</div><div class="icon" ng-click="chooseAnotherStation()"><span class="icon-arrow-right"></span></div></div>
+                    <div class="current"><div>{{dublinCommuter.luasManager.currentStation.name}}</div></div>
                 </div>
                 <div class="twelve columns">
                     <div class="schedule" data-ng-hide='dublinCommuter.luasManager.hasForecast()'><span class="icon-clock"></span><span class="details">No outbound forecast</span></div>

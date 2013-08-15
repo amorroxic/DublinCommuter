@@ -1847,17 +1847,8 @@ ul.sostyled li {
   ul.sostyled li span.option {
     margin-left: 0.3125em; }
 
-.current div {
-  font-size: 1em;
-  line-height: 2.5em;
-  margin-right: 0.3125em;
-  float: left; }
-  .current div.icon {
-    cursor: pointer;
-    margin-top: -0.0625em; }
-  .current div span {
-    color: #333333;
-    font-size: 0.75em; }
+header .icon {
+  cursor: pointer; }
 
 h1.heading {
   margin: 0.125em 0; }
