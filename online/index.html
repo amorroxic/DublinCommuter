@@ -42,7 +42,7 @@
 		<header>
             <div class="row">
                 <div class="twelve columns">
-                    <h1 class="heading">Dublin Commuter <div class="icon" ng-click="chooseAnotherStation()"><span class="icon-arrow-left"></span></div></h1>
+                    <h1 class="heading">Dublin Commuter <div class="icon" data-ng-cloak ng-click="chooseAnotherStation()"><span class="icon-arrow-left"></span></div></h1>
 
                 </div>
                 <div class="twelve columns now" data-ng-cloak>
@@ -57,7 +57,7 @@
             </div>
 		</header>
 
-        <section ng-hide="dublinCommuter.luasManager.hasLuas()">
+        <section ng-hide="dublinCommuter.luasManager.hasLuas()" data-ng-cloak>
             <div class="row">
                 <div class="twelve columns">
                     <input type="text" placeholder='search station..' ng-model='search'>
