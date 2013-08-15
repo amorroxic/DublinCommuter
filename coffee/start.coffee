@@ -97,6 +97,6 @@ controller = app.controller "DublinCommuterController", ($scope, dublinLuasFacto
     $scope.stationClicked = (station) ->
         dublinLuasFactory.getApplication().luasManager.setStation station
     $scope.chooseAnotherStation = () ->
-        $scope.suggestWindowOpened = yes
+        do dublinLuasFactory.getApplication().clearCurrentPreferences
 
 

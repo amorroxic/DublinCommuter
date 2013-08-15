@@ -152,8 +152,9 @@ class ForecastManager extends LocalStorage
 
     destroy: () ->
         @remove @id
-        @_hasForecast = no
-        @forecast = {}
+        @_hasForecast   = no
+        @coordinates    = no
+        @forecast       = {}
 
     celsius: (f) ->
         c = null

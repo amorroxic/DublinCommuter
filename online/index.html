@@ -71,6 +71,7 @@
         <section data-ng-cloak ng-show="dublinCommuter.luasManager.hasLuas()">
             <div class="row forecast">
                 <div class="twelve columns">
+
                 </div>
             </div>
             <div class="row luas">
@@ -79,7 +80,7 @@
                     <div class="schedule" data-ng-show='dublinCommuter.luasManager.hasForecast()' data-ng-repeat='inbound in dublinCommuter.luasManager.forecastData.inbound'><span class="icon-clock"></span><span class="details">{{inbound.time | timeformat }} {{inbound.location}}</span></div>
                 </div>
                 <div class="twelve columns now" data-ng-cloak data-ng-show='dublinCommuter.luasManager.hasLuas()' data-ng-cloak>
-                    <div class="current">{{dublinCommuter.luasManager.currentStation.name}}</div>
+                    <div class="current"><div>{{dublinCommuter.luasManager.currentStation.name}}</div><div class="icon" ng-click="chooseAnotherStation()"><span class="icon-arrow-right"></span></div></div>
                 </div>
                 <div class="twelve columns">
                     <div class="schedule" data-ng-hide='dublinCommuter.luasManager.hasForecast()'><span class="icon-clock"></span><span class="details">No outbound forecast</span></div>

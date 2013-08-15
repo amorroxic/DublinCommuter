@@ -51,6 +51,12 @@ class DublinCommuter extends LocalStorage
         do @luasManager.populate
         do @weatherManager.populate
 
+    clearCurrentPreferences: () ->
+        do @luasManager.destroy
+        do @weatherManager.destroy
+        console.log "Dsad"
+        @emitEvent DublinCommuter.STATUS_CHANGE_EVENT, [@]
+
     handleLuasStationFound: (station) =>
         @emitEvent DublinCommuter.STATUS_CHANGE_EVENT, [@]
 

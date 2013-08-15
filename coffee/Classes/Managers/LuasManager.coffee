@@ -418,7 +418,9 @@ class LuasManager extends LocalStorage
 
     destroy: () ->
         @remove @id
-        @_hasLuas = no
+        @_hasForecast   = no
+        @_hasLuas       = no
+        @coordinates    = no
 
     hasLuas: () ->
         @_hasLuas

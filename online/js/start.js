@@ -114,7 +114,7 @@
       return dublinLuasFactory.getApplication().luasManager.setStation(station);
     };
     return $scope.chooseAnotherStation = function() {
-      return $scope.suggestWindowOpened = true;
+      return dublinLuasFactory.getApplication().clearCurrentPreferences();
     };
   });
 
@@ -958,6 +958,7 @@
     ForecastManager.prototype.destroy = function() {
       this.remove(this.id);
       this._hasForecast = false;
+      this.coordinates = false;
       return this.forecast = {};
     };
 
@@ -1462,7 +1463,9 @@
 
     LuasManager.prototype.destroy = function() {
       this.remove(this.id);
-      return this._hasLuas = false;
+      this._hasForecast = false;
+      this._hasLuas = false;
+      return this.coordinates = false;
     };
 
     LuasManager.prototype.hasLuas = function() {
@@ -1588,6 +1591,13 @@
     DublinCommuter.prototype.run = function() {
       this.luasManager.populate();
       return this.weatherManager.populate();
+    };
+
+    DublinCommuter.prototype.clearCurrentPreferences = function() {
+      this.luasManager.destroy();
+      this.weatherManager.destroy();
+      console.log("Dsad");
+      return this.emitEvent(DublinCommuter.STATUS_CHANGE_EVENT, [this]);
     };
 
     DublinCommuter.prototype.handleLuasStationFound = function(station) {
