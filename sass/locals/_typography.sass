@@ -2,30 +2,62 @@ body
     font-family: 'Dosis', sans-serif
     font-size: 28px
     font-weight: 700
+    margin-left: 0
 
-@media screen and (max-width: 980px), screen and (max-device-width: 980px)
+@media screen and (max-width: 980px) and (orientation:portrait), screen and (max-device-width: 980px) and (orientation:portrait)
     body
+        margin-left: emCalc(15px)
         font-size: 46px
-@media screen and (max-width: 800px), screen and (max-device-width: 800px)
+
+// 800 x 1280
+@media screen and (max-width: 800px) and (orientation:portrait), screen and (max-device-width: 800px) and (orientation:portrait)
     body
+        margin-left: emCalc(10px)
         font-size: 44px
-@media screen and (max-width: 768px), screen and (max-device-width: 768px)
+@media screen and (max-width: 1280px) and (orientation:landscape), screen and (max-device-width: 1280px) and (orientation:landscape)
+    body
+        margin-left: emCalc(20px)
+        font-size: 28px
+
+
+// 768 x 1024
+@media screen and (max-width: 768px) and (orientation:portrait), screen and (max-device-width: 768px) and (orientation:portrait)
     body
         font-size: 36px
-@media screen and (max-width: 360px), screen and (max-device-width: 360px)
+        margin-left: emCalc(22px)
+@media screen and (max-width: 1024px) and (orientation:landscape), screen and (max-device-width: 1024px) and (orientation:landscape)
+    body
+        font-size: 28px
+        margin-left: emCalc(22px)
+
+
+@media screen and (max-width: 600px) and (orientation:portrait), screen and (max-device-width: 600px) and (orientation:portrait)
+    body
+        font-size: 36px
+        margin-left: emCalc(8px)
+
+// 360 x 640
+@media screen and (max-width: 360px) and (orientation:portrait), screen and (max-device-width: 360px) and (orientation:portrait)
     body
         font-size: 22px
-@media screen and (max-width: 320px), screen and (max-device-width: 320px)
+        margin-left: emCalc(4px)
+@media screen and (max-width: 640px) and (orientation:landscape), screen and (max-device-width: 640px) and (orientation:landscape)
+    body
+        font-size: 30px
+        margin-left: emCalc(30px)
+
+
+// 320 x 480
+@media screen and (max-width: 320px) and (orientation:portrait), screen and (max-device-width: 320px) and (orientation:portrait)
     body
         font-size: 18px
+        margin-left: emCalc(10px)
 
-@media screen and (max-height: 320px), screen and (max-device-height: 320px)
+@media screen and (max-width: 480px) and (orientation:landscape), screen and (max-device-width: 480px) and (orientation:landscape)
     body
-        font-size: 14px
+        font-size: 26px
+        margin-left: emCalc(20px)
 
-@media screen and (max-height: 360px), screen and (max-device-height: 360px)
-    body
-        font-size: 14px
 
 h1
     font-family: 'Dosis', sans-serif

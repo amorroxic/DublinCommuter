@@ -1738,29 +1738,49 @@ body {
 body {
   font-family: "Dosis", sans-serif;
   font-size: 28px;
-  font-weight: 700; }
+  font-weight: 700;
+  margin-left: 0; }
 
-@media screen and (max-width: 980px), screen and (max-device-width: 980px) {
+@media screen and (max-width: 980px) and (orientation: portrait), screen and (max-device-width: 980px) and (orientation: portrait) {
   body {
+    margin-left: 0.9375em;
     font-size: 46px; } }
-@media screen and (max-width: 800px), screen and (max-device-width: 800px) {
+@media screen and (max-width: 800px) and (orientation: portrait), screen and (max-device-width: 800px) and (orientation: portrait) {
   body {
+    margin-left: 0.625em;
     font-size: 44px; } }
-@media screen and (max-width: 768px), screen and (max-device-width: 768px) {
+@media screen and (max-width: 1280px) and (orientation: landscape), screen and (max-device-width: 1280px) and (orientation: landscape) {
   body {
-    font-size: 36px; } }
-@media screen and (max-width: 360px), screen and (max-device-width: 360px) {
+    margin-left: 1.25em;
+    font-size: 28px; } }
+@media screen and (max-width: 768px) and (orientation: portrait), screen and (max-device-width: 768px) and (orientation: portrait) {
   body {
-    font-size: 22px; } }
-@media screen and (max-width: 320px), screen and (max-device-width: 320px) {
+    font-size: 36px;
+    margin-left: 1.375em; } }
+@media screen and (max-width: 1024px) and (orientation: landscape), screen and (max-device-width: 1024px) and (orientation: landscape) {
   body {
-    font-size: 18px; } }
-@media screen and (max-height: 320px), screen and (max-device-height: 320px) {
+    font-size: 28px;
+    margin-left: 1.375em; } }
+@media screen and (max-width: 600px) and (orientation: portrait), screen and (max-device-width: 600px) and (orientation: portrait) {
   body {
-    font-size: 14px; } }
-@media screen and (max-height: 360px), screen and (max-device-height: 360px) {
+    font-size: 36px;
+    margin-left: 0.5em; } }
+@media screen and (max-width: 360px) and (orientation: portrait), screen and (max-device-width: 360px) and (orientation: portrait) {
   body {
-    font-size: 14px; } }
+    font-size: 22px;
+    margin-left: 0.25em; } }
+@media screen and (max-width: 640px) and (orientation: landscape), screen and (max-device-width: 640px) and (orientation: landscape) {
+  body {
+    font-size: 30px;
+    margin-left: 1.875em; } }
+@media screen and (max-width: 320px) and (orientation: portrait), screen and (max-device-width: 320px) and (orientation: portrait) {
+  body {
+    font-size: 18px;
+    margin-left: 0.625em; } }
+@media screen and (max-width: 480px) and (orientation: landscape), screen and (max-device-width: 480px) and (orientation: landscape) {
+  body {
+    font-size: 26px;
+    margin-left: 1.25em; } }
 h1 {
   font-family: "Dosis", sans-serif;
   font-size: 2em;
