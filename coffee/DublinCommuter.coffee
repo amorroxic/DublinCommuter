@@ -64,30 +64,3 @@ class DublinCommuter extends LocalStorage
     cleanupAfterPreviousVersions: () ->
         @remove 'forecast-data'
 
-
-    #run: () ->
-        #do @cities.populate
-
-    #handleNewCityLoaded: (params) =>
-        #@mapInstance.addCityToMap params
-
-    #handleAllCitiesLoaded: () =>
-        #do @cities.mildRefreshForecasts
-
-    #handleCityWasRefreshed: (params) =>
-        #@mapInstance.updateCity params
-
-    #handleCityRefreshError: (params) =>
-        #console.log "Failed updating forecast for "+params.name
-
-    #handleCitiesIsUnknown: (params) =>
-        #console.log "Could not geolocate "+params.name
-
-    #handleLocationRemovedFromMap: (cityID) =>
-        #@cities.removeCity cityID
-
-    #handleAutocompleteAddCity: (cityName) =>
-        #@cities.generateIdAndAddCity cityName
-
-    #handleAutocompleteLocationNotFound: () =>
-        #console.log 'Location not found'
