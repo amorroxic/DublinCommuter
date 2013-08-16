@@ -4,13 +4,13 @@
 
 /* TEAM */
   Developer: Adrian Mihai
-  Site: http://nouauzina.ro
+  Site: http://dublin.io
   Twitter: @amorroxic
-  Location: Brasov, Romania
+  Location: Dublin, Ireland
 
 /* THANKS */
   Names (& URL): All these dolphins in our waters.
 
 /* SITE */
-  Standards: HTML5, CSS3
-  Components:
+  Standards: HTML5, CSS3, CoffeeScript, OOP, Sass
+  Components: Angular.js, Zepto, jQuery, Zurb Foundation
