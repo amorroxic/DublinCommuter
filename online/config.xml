@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+    <widget xmlns = "http://www.w3.org/ns/widgets"
+        xmlns:gap = "http://phonegap.com/ns/1.0"
+        id        = "io.dublin.commuter"
+        versionCode="10"
+        version   = "1.0.0">
+    <!-- versionCode is optional and Android only -->
+    <name>Dublin Commuter</name>
+    <description>
+		Open source Luas schedules, traffic information and weather forecasts for Dublin.
+		Feel free to peek in: https://github.com/amorroxic/DublinCommuter
+    </description>
+    <author href="http://dublin.io" email="dcapp@dublin.io">
+        Adrian Mihai
+    </author>
+	<preference name="phonegap-version" value="2.9.0" />
+	<preference name="orientation" value="both" />
+	<preference name="target-device" value="universal" />
+	<preference name="fullscreen" value="true" />
+	<preference name="exit-on-suspend" value="true" />
+	<preference name="show-splash-screen-spinner" value="true" />
+	<preference name="splash-screen-duration" value="500" />
+	<icon src="icon.png" />
+	<icon src="img/touch/apple-touch-icon-57x57-precomposed.png" gap:platform="ios" width="57" height="57" />
+	<icon src="img/touchapple-touch-icon-114x114-precomposed.png" gap:platform="ios" width="114" height="114" />
+	<!-- retina iPad support: PhoneGap 2.5.0+ only -->
+	<icon src="img/touch/apple-touch-icon-72x72-precomposed.png" gap:platform="ios" width="72" height="72" />
+	<icon src="img/touch/apple-touch-icon-144x144-precomposed.png" gap:platform="ios" width="144" height="144" />
+	<icon src="img/touch/apple-touch-icon-57x57-precomposed.png" gap:platform="android" gap:density="ldpi" />
+	<icon src="img/touch/apple-touch-icon-72x72-precomposed.png" gap:platform="android" gap:density="mdpi" />
+	<icon src="img/touchapple-touch-icon-114x114-precomposed.png" gap:platform="android" gap:density="hdpi" />
+	<icon src="img/touch/apple-touch-icon-144x144-precomposed.png" gap:platform="android" gap:density="xhdpi" />
+	<gap:splash src="splash.png" />
+	<preference name="permissions" value="none"/>
+	<access origin="http://dublin.io" subdomains="true" />
+</widget>
