@@ -7,8 +7,7 @@
     <!-- versionCode is optional and Android only -->
     <name>Dublin Commuter</name>
     <description>
-		Open source Luas schedules, traffic information and weather forecasts for Dublin.
-		Feel free to peek in: https://github.com/amorroxic/DublinCommuter
+		Open source Luas schedules, traffic information and weather forecasts for Dublin. Feel free to peek in: https://github.com/amorroxic/DublinCommuter
     </description>
     <author href="http://dublin.io" email="dcapp@dublin.io">
         Adrian Mihai
