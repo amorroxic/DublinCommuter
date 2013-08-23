@@ -34,6 +34,8 @@
         <!-- This script prevents links from opening in Mobile Safari. https://gist.github.com/1042026 -->
         <script src="js/vendor/custom.modernizr.min.js"></script>
         <script>(function(a,b,c){if(c in b&&b[c]){var d,e=a.location,f=/^(a|html)$/i;a.addEventListener("click",function(a){d=a.target;while(!f.test(d.nodeName))d=d.parentNode;"href"in d&&(d.href.indexOf("http")||~d.href.indexOf(e.host))&&(a.preventDefault(),e.href=d.href)},!1)}})(document,window.navigator,"standalone")</script>
+        <script type="text/javascript" charset="utf-8" src="cordova-1.5.0.js"></script>
+
     </head>
 
     <body data-ng-controller="DublinCommuterController">
@@ -114,6 +116,8 @@
 		<!--script src="js/vendor/meny-ck.js"></script-->
         <script src="js/vendor/angular.min.js"></script>
 		<script src="js/start.js"></script>
+
+    </script>
 
     </body>
 </html>

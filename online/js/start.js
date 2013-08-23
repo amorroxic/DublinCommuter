@@ -7,7 +7,26 @@
     __slice = [].slice,
     __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
-  app = angular.module('ngDublinCommuter', []);
+  angular.module("btford.phonegap.ready", []).factory("phonegapReady", function($rootScope) {
+    return function(fn) {
+      var impl, queue;
+      queue = [];
+      impl = function() {
+        return queue.push(Array.prototype.slice.call(arguments));
+      };
+      document.addEventListener("DOMContentLoaded", (function() {
+        queue.forEach(function(args) {
+          return fn.apply(this, args);
+        });
+        return impl = fn;
+      }), false);
+      return function() {
+        return impl.apply(this, arguments);
+      };
+    };
+  });
+
+  app = angular.module('ngDublinCommuter', ['btford.phonegap.ready']);
 
   app.factory("dublinLuasFactory", function($q, $rootScope, safeApply) {
     var deferred, dublinCommuter, factoryObject;

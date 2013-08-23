@@ -1,11 +1,25 @@
+'use strict'
 #document.addEventListener 'DOMContentLoaded', () ->
     #a = new DublinCommuter
     #a.addListener DublinCommuter.LUAS_STATUS, (a) ->
         #console.log a
     #do a.run
-#, no
-'use strict'
-app = angular.module('ngDublinCommuter', [] )
+angular.module("btford.phonegap.ready", []).factory "phonegapReady", ($rootScope) ->
+    (fn) ->
+        queue = []
+        impl = ->
+            queue.push Array::slice.call(arguments)
+
+        document.addEventListener "DOMContentLoaded", (->
+            queue.forEach (args) ->
+                fn.apply this, args
+
+            impl = fn
+        ), false
+        ->
+          impl.apply this, arguments
+
+app = angular.module('ngDublinCommuter', ['btford.phonegap.ready'] )
 
 app.factory "dublinLuasFactory", ($q, $rootScope, safeApply) ->
 
@@ -99,4 +113,6 @@ controller = app.controller "DublinCommuterController", ($scope, dublinLuasFacto
     $scope.chooseAnotherStation = () ->
         do dublinLuasFactory.getApplication().clearCurrentPreferences
 
+
+#, no
 
