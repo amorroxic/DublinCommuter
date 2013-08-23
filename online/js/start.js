@@ -14,7 +14,7 @@
       impl = function() {
         return queue.push(Array.prototype.slice.call(arguments));
       };
-      document.addEventListener("DOMContentLoaded", (function() {
+      document.addEventListener("deviceready", (function() {
         queue.forEach(function(args) {
           return fn.apply(this, args);
         });

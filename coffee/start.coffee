@@ -10,7 +10,7 @@ angular.module("btford.phonegap.ready", []).factory "phonegapReady", ($rootScope
         impl = ->
             queue.push Array::slice.call(arguments)
 
-        document.addEventListener "DOMContentLoaded", (->
+        document.addEventListener "deviceready", (->
             queue.forEach (args) ->
                 fn.apply this, args
 
