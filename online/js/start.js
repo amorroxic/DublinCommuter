@@ -137,8 +137,11 @@
     $scope.stationClicked = function(station) {
       return dublinLuasFactory.getApplication().luasManager.setStation(station);
     };
-    return $scope.chooseAnotherStation = function() {
+    $scope.chooseAnotherStation = function() {
       return dublinLuasFactory.getApplication().clearCurrentPreferences();
+    };
+    return $scope.refreshWeather = function() {
+      return dublinLuasFactory.getApplication().luasManager.refreshForecast();
     };
   });
 

@@ -118,7 +118,8 @@ controller = app.controller "DublinCommuterController", ($scope, dublinLuasFacto
         dublinLuasFactory.getApplication().luasManager.setStation station
     $scope.chooseAnotherStation = () ->
         do dublinLuasFactory.getApplication().clearCurrentPreferences
-
+    $scope.refreshWeather = () ->
+        do dublinLuasFactory.getApplication().luasManager.refreshForecast
 
 #, no
 
