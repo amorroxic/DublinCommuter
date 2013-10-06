@@ -31,10 +31,6 @@
 	<icon src="img/touch/apple-touch-icon-72x72-precomposed.png" gap:platform="android" gap:density="mdpi" />
     <icon src="img/touch/apple-touch-icon-114x114-precomposed.png" gap:platform="android" gap:density="hdpi" />
 	<icon src="img/touch/apple-touch-icon-144x144-precomposed.png" gap:platform="android" gap:density="xhdpi" />
-	<gap:splash gap:density="ldpi" gap:platform="android" src="img/splash/ldpi.png" />
-	<gap:splash gap:density="mdpi" gap:platform="android" src="img/splash/mdpi.png" />
-	<gap:splash gap:density="hdpi" gap:platform="android" src="img/splash/hdpi.png" />
-	<gap:splash src="img/splash/hdpi.png" />
 	<preference name="permissions" value="none"/>
 	<access origin="http://dublin.io" subdomains="true" />
 </widget>
