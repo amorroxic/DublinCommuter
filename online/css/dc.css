@@ -2007,7 +2007,7 @@ span {
 .current-time {
   color: #222222;
   white-space: nowrap;
-  margin-right: 0.3125em;
+  margin-left: 0.3125em;
   text-transform: uppercase; }
   .current-time span {
     color: #222222; }
