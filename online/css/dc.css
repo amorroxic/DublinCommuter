@@ -2004,22 +2004,18 @@ span {
   text-transform: uppercase; }
 
 .current-time {
-  color: #eb27a8;
-  font-size: 1.5em; }
+  color: #eb27a8; }
   .current-time span {
     color: #222222;
     text-transform: uppercase; }
 
 .weather {
-  font-size: 1.5em;
   color: #eb27a8; }
-  .weather .row.shadow span {
-    font-size: 0.75em; }
-    .weather .row.shadow span span {
-      font-size: 0.875em;
-      font-family: "Dosis", sans-serif;
-      margin-left: 0.3125em;
-      text-transform: uppercase; }
+  .weather .row.shadow span span {
+    font-family: "Dosis", sans-serif;
+    margin-left: 0.3125em;
+    text-transform: uppercase;
+    font-weight: 700; }
 
 .schedule {
   text-transform: uppercase;
