@@ -44,24 +44,71 @@
             <div class="row">
                 <div class="twelve columns">
                     <h1 class="heading">Dublin Commuter <div class="icon" data-ng-cloak data-ng-click="chooseAnotherStation()"><span class="icon-arrow-left"></span></div></h1>
-
                 </div>
-                <div class="twelve columns now" data-ng-cloak>
-                    <div class="current-time">{{timerInstance.currentDate | date: 'HH:mm'}}</div>
-                    <div class="currentdate"><div class="day">{{timerInstance.currentDate | date: 'dd'}}</div><div class="month">{{timerInstance.currentDate | date: 'MMMM'}}</div></div>
-                    <div class="weather" ng-show="dublinCommuter.weatherManager.hasForecast()">
-                        <span class="{{dublinCommuter.weatherManager.forecast.current.icon}}"></span>
-                        <span class="temperature">{{dublinCommuter.weatherManager.forecast.current.temp}}&deg;</span>
-                    </div>
-                    <div class="weather" ng-hide="dublinCommuter.weatherManager.hasForecast()">
-                        <span class="icon-none"></span>
-                        <span class="temperature"></span>
-                    </div>
-
-                </div>
-
             </div>
 		</header>
+
+        <section ng-show="dublinCommuter.luasManager.hasLuas()" data-ng-cloak>
+            <div class="row">
+                <div class="large-6 small-12 columns bottom_40 medium-12">
+
+                    <div class="row" data-ng-cloak>
+                        <div class="large-4 small-4 columns">
+                            <div class="weather" ng-show="dublinCommuter.weatherManager.hasForecast()">
+                                <span class="{{dublinCommuter.weatherManager.forecast.current.icon}}"></span>
+                                <span class="temperature">{{dublinCommuter.weatherManager.forecast.current.temp}}&deg;</span>
+
+                                <div class="row shadow top_20">
+                                    <div class="large-12 small-12 columns top_5" data-ng-repeat="forecast in dublinCommuter.weatherManager.forecast.upcoming">
+                                            <span class="{{forecast.icon}}"><span class="temperature">{{forecast.temp}}&deg; in {{forecast.hours | timeformat:'hour'}}</span></span>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="weather" ng-hide="dublinCommuter.weatherManager.hasForecast()">
+                                <span class="icon-none"></span>
+                                <span class="temperature"></span>
+                            </div>
+                        </div>
+                        <div class="large-4 small-4 columns">
+                            <div class="current-time">{{timerInstance.currentDate | date: 'HH:mm'}}</div>
+                        </div>
+                        <div class="large-4 small-4 columns">
+                            <div class="current-date"><div class="day">{{timerInstance.currentDate | date: 'dd'}}</div><div class="month">{{timerInstance.currentDate | date: 'MMMM'}}</div></div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="large-6 small-12 columns medium-12" data-ng-cloak ng-show="dublinCommuter.luasManager.hasLuas()">
+                    <div class="row">
+                        <div class="large-12 small-12 columns">
+                            <div class="schedule bottom_15" data-ng-hide='dublinCommuter.luasManager.hasForecast()'><span class="icon-search"></span> <span class="details">Loading data</span></div>
+                            <div class="schedule bottom_15" data-ng-show='dublinCommuter.luasManager.hasForecast()' data-ng-repeat='inbound in dublinCommuter.luasManager.forecastData.inbound'><span class="icon-clock"></span><span class="details">{{inbound.time | timeformat:'minute' }} {{inbound.location}}</span></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="large-12 small-12 columns bottom_15">
+                            <div class="current"><div>{{dublinCommuter.luasManager.currentStation.name}}</div></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="large-12 small-12 columns">
+                            <div class="schedule" data-ng-hide='dublinCommuter.luasManager.hasForecast()'><span class="icon-search"></span> <span class="details">Loading data</span></div>
+                            <div class="schedule bottom_15" data-ng-show='dublinCommuter.luasManager.hasForecast()' data-ng-repeat='inbound in dublinCommuter.luasManager.forecastData.outbound'><span class="icon-clock"></span><span class="details">{{inbound.time | timeformat:'minute' }} {{inbound.location}}</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="large-12 small-12 columns">
+                    <div class="schedule"><span class="dimmed">Auto refresh in {{60-timerInstance.currentDate.getSeconds()}} seconds.<br/>dublin.io - august 2013</span></div>
+                </div>
+            </div>
+
+        </section>
+
 
         <section ng-hide="dublinCommuter.luasManager.hasLuas()" data-ng-cloak>
             <div class="row">
@@ -75,31 +122,7 @@
         </section>
 
 
-        <section data-ng-cloak ng-show="dublinCommuter.luasManager.hasLuas()">
-            <div class="row forecast">
-                <div class="twelve columns">
-
-                </div>
-            </div>
-            <div class="row luas">
-                <div class="twelve columns">
-                    <div class="schedule" data-ng-hide='dublinCommuter.luasManager.hasForecast()'><span class="icon-search"></span> <span class="details">Loading data</span></div>
-                    <div class="schedule" data-ng-show='dublinCommuter.luasManager.hasForecast()' data-ng-repeat='inbound in dublinCommuter.luasManager.forecastData.inbound'><span class="icon-clock"></span><span class="details">{{inbound.time | timeformat }} {{inbound.location}}</span></div>
-                </div>
-                <div class="twelve columns now" data-ng-cloak data-ng-show='dublinCommuter.luasManager.hasLuas()' data-ng-cloak>
-                    <div class="current"><div>{{dublinCommuter.luasManager.currentStation.name}}</div></div>
-                </div>
-                <div class="twelve columns">
-                    <div class="schedule" data-ng-hide='dublinCommuter.luasManager.hasForecast()'><span class="icon-search"></span> <span class="details">Loading data</span></div>
-                    <div class="schedule" data-ng-show='dublinCommuter.luasManager.hasForecast()' data-ng-repeat='inbound in dublinCommuter.luasManager.forecastData.outbound'><span class="icon-clock"></span><span class="details">{{inbound.time | timeformat }} {{inbound.location}}</span></div>
-                </div>
-            </div>
-            <div class="row luas">
-                <div class="twelve columns">
-                    <div class="schedule"><span class="dimmed">Auto refresh in {{60-timerInstance.currentDate.getSeconds()}} seconds.<br/>dublin.io - august 2013</span></div>
-                </div>
-            </div>
-        </section>
+    </div>
 
 
         <!-- Load local Zepto.js or (as a fallback) jQuery from Google CDN or (as a fallback) local jQuery -->
@@ -115,8 +138,6 @@
 		<!--script src="js/vendor/meny-ck.js"></script-->
         <script src="js/vendor/angular.min.js"></script>
 		<script src="js/start.js"></script>
-
-    </script>
 
     </body>
 </html>

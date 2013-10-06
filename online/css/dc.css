@@ -809,6 +809,230 @@ select {
     margin-left: auto;
     margin-right: auto;
     float: none !important; } }
+/* Styles for screens that are atleast 768px and max width 1024px */
+@media only screen and (min-width: 48em) and (max-width: 1024px) {
+  .small-1.medium-1 {
+    position: relative;
+    width: 8.33333%; }
+
+  .small-2.medium-2 {
+    position: relative;
+    width: 16.66667%; }
+
+  .small-3.medium-3 {
+    position: relative;
+    width: 25%; }
+
+  .small-4.medium-4 {
+    position: relative;
+    width: 33.33333%; }
+
+  .small-5.medium-5 {
+    position: relative;
+    width: 41.66667%; }
+
+  .small-6.medium-6 {
+    position: relative;
+    width: 50%; }
+
+  .small-7.medium-7 {
+    position: relative;
+    width: 58.33333%; }
+
+  .small-8.medium-8 {
+    position: relative;
+    width: 66.66667%; }
+
+  .small-9.medium-9 {
+    position: relative;
+    width: 75%; }
+
+  .small-10.medium-10 {
+    position: relative;
+    width: 83.33333%; }
+
+  .small-11.medium-11 {
+    position: relative;
+    width: 91.66667%; }
+
+  .small-12.medium-12 {
+    position: relative;
+    width: 100%; }
+
+  .row .medium-offset-0 {
+    position: relative;
+    margin-left: 0%; }
+
+  .row .medium-offset-1 {
+    position: relative;
+    margin-left: 8.33333%; }
+
+  .row .medium-offset-2 {
+    position: relative;
+    margin-left: 16.66667%; }
+
+  .row .medium-offset-3 {
+    position: relative;
+    margin-left: 25%; }
+
+  .row .medium-offset-4 {
+    position: relative;
+    margin-left: 33.33333%; }
+
+  .row .medium-offset-5 {
+    position: relative;
+    margin-left: 41.66667%; }
+
+  .row .medium-offset-6 {
+    position: relative;
+    margin-left: 50%; }
+
+  .row .medium-offset-7 {
+    position: relative;
+    margin-left: 58.33333%; }
+
+  .row .medium-offset-8 {
+    position: relative;
+    margin-left: 66.66667%; }
+
+  .row .medium-offset-9 {
+    position: relative;
+    margin-left: 75%; }
+
+  .row .medium-offset-10 {
+    position: relative;
+    margin-left: 83.33333%; }
+
+  .row .medium-offset-11 {
+    position: relative;
+    margin-left: 91.66667%; }
+
+  .push-1 {
+    position: relative;
+    left: 8.33333%;
+    right: auto; }
+
+  .pull-1 {
+    position: relative;
+    right: 8.33333%;
+    left: auto; }
+
+  .push-2 {
+    position: relative;
+    left: 16.66667%;
+    right: auto; }
+
+  .pull-2 {
+    position: relative;
+    right: 16.66667%;
+    left: auto; }
+
+  .push-3 {
+    position: relative;
+    left: 25%;
+    right: auto; }
+
+  .pull-3 {
+    position: relative;
+    right: 25%;
+    left: auto; }
+
+  .push-4 {
+    position: relative;
+    left: 33.33333%;
+    right: auto; }
+
+  .pull-4 {
+    position: relative;
+    right: 33.33333%;
+    left: auto; }
+
+  .push-5 {
+    position: relative;
+    left: 41.66667%;
+    right: auto; }
+
+  .pull-5 {
+    position: relative;
+    right: 41.66667%;
+    left: auto; }
+
+  .push-6 {
+    position: relative;
+    left: 50%;
+    right: auto; }
+
+  .pull-6 {
+    position: relative;
+    right: 50%;
+    left: auto; }
+
+  .push-7 {
+    position: relative;
+    left: 58.33333%;
+    right: auto; }
+
+  .pull-7 {
+    position: relative;
+    right: 58.33333%;
+    left: auto; }
+
+  .push-8 {
+    position: relative;
+    left: 66.66667%;
+    right: auto; }
+
+  .pull-8 {
+    position: relative;
+    right: 66.66667%;
+    left: auto; }
+
+  .push-9 {
+    position: relative;
+    left: 75%;
+    right: auto; }
+
+  .pull-9 {
+    position: relative;
+    right: 75%;
+    left: auto; }
+
+  .push-10 {
+    position: relative;
+    left: 83.33333%;
+    right: auto; }
+
+  .pull-10 {
+    position: relative;
+    right: 83.33333%;
+    left: auto; }
+
+  .push-11 {
+    position: relative;
+    left: 91.66667%;
+    right: auto; }
+
+  .pull-11 {
+    position: relative;
+    right: 91.66667%;
+    left: auto; }
+
+  .column.medium-centered,
+  .columns.medium-centered {
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    float: none !important; }
+
+  .column.medium-uncentered,
+  .columns.medium-uncentered {
+    margin-left: 0;
+    margin-right: 0;
+    float: left !important; }
+
+  .column.medium-uncentered.opposite,
+  .columns.medium-uncentered.opposite {
+    float: right !important; } }
 /* Foundation Block Grids for below small breakpoint */
 @media only screen {
   [class*="block-grid-"] {
@@ -1744,73 +1968,28 @@ body {
 
 body {
   font-family: "Dosis", sans-serif;
-  font-size: 28px;
+  font-size: 24px;
   font-weight: 700;
   margin-left: 0; }
 
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
   display: none !important; }
 
-@media screen and (max-width: 980px) and (orientation: portrait), screen and (max-device-width: 980px) and (orientation: portrait) {
-  body {
-    margin-left: 0.9375em;
-    font-size: 46px; } }
-@media screen and (max-width: 800px) and (orientation: portrait), screen and (max-device-width: 800px) and (orientation: portrait) {
-  body {
-    margin-left: 0.625em;
-    font-size: 44px; } }
-@media screen and (max-width: 1280px) and (orientation: landscape), screen and (max-device-width: 1280px) and (orientation: landscape) {
-  body {
-    margin-left: 1.25em;
-    font-size: 28px; } }
-@media screen and (max-width: 768px) and (orientation: portrait), screen and (max-device-width: 768px) and (orientation: portrait) {
-  body {
-    font-size: 36px;
-    margin-left: 1.375em; } }
-@media screen and (max-width: 1024px) and (orientation: landscape), screen and (max-device-width: 1024px) and (orientation: landscape) {
-  body {
-    font-size: 28px;
-    margin-left: 1.375em; } }
-@media screen and (max-width: 600px) and (orientation: portrait), screen and (max-device-width: 600px) and (orientation: portrait) {
-  body {
-    font-size: 36px;
-    margin-left: 0.5em; } }
-@media screen and (max-width: 360px) and (orientation: portrait), screen and (max-device-width: 360px) and (orientation: portrait) {
-  body {
-    font-size: 22px;
-    margin-left: 0.25em; } }
-@media screen and (max-width: 640px) and (orientation: landscape), screen and (max-device-width: 640px) and (orientation: landscape) {
-  body {
-    font-size: 30px;
-    margin-left: 1.875em; } }
-@media screen and (max-width: 360px) and (orientation: portrait), screen and (max-device-width: 360px) and (orientation: portrait) {
-  body {
-    font-size: 22px;
-    margin-left: 0.25em; } }
-@media screen and (max-width: 360px) and (orientation: landscape), screen and (max-device-width: 360px) and (orientation: landscape) {
-  body {
-    font-size: 22px;
-    margin-left: 0.25em; } }
-@media screen and (max-width: 320px) and (orientation: portrait), screen and (max-device-width: 320px) and (orientation: portrait) {
-  body {
-    font-size: 18px;
-    margin-left: 0.625em; } }
-@media screen and (max-width: 480px) and (orientation: landscape), screen and (max-device-width: 480px) and (orientation: landscape) {
-  body {
-    font-size: 26px;
-    margin-left: 1.25em; } }
-@media screen and (max-width: 320px) and (orientation: portrait), screen and (max-device-width: 320px) and (orientation: portrait) {
-  body {
-    font-size: 18px;
-    margin-left: 0.625em; } }
-@media screen and (max-width: 320px) and (orientation: landscape), screen and (max-device-width: 320px) and (orientation: landscape) {
-  body {
-    font-size: 18px;
-    margin-left: 0.625em; } }
 h1 {
   font-family: "Dosis", sans-serif;
   font-size: 2em;
   text-transform: uppercase; }
+
+.row h1.heading {
+  font-size: 1.5em;
+  margin: 1.25em 0 1.25em 0; }
+
+.row.shadow {
+  color: black;
+  text-transform: uppercase; }
+
+header .icon {
+  cursor: pointer; }
 
 nav {
   font-size: 1.125em; }
@@ -1818,66 +1997,42 @@ nav {
     font-size: 0.875em;
     color: #444444; }
 
+span {
+  white-space: nowrap; }
+
+.current-date {
+  text-transform: uppercase; }
+
+.current-time {
+  color: #eb27a8;
+  font-size: 1.5em; }
+
 .weather {
   font-size: 1.5em;
-  text-transform: uppercase;
-  color: #eb27a8;
-  float: left;
-  margin-top: 0.0625em; }
-
-.now {
-  clear: both;
-  width: 100%; }
-
-.currentdate {
-  text-transform: uppercase;
-  font-size: 0.75em;
-  text-align: center;
-  width: 6.25em;
-  float: left;
-  border-right: 0.1875em solid black;
-  border-left: 0.1875em solid black;
-  margin: 0 1.25em; }
-  .currentdate div.day {
-    width: 100%;
-    font-size: 1.5em; }
-  .currentdate div.month {
-    display: block;
-    width: 100%;
-    font-size: 1em; }
-
-.icon-forecast {
-  font-size: 0.875em;
-  color: black;
-  margin-top: -emCalc(20px); }
-
-.temperature {
-  margin-left: 0.1875em; }
+  color: #eb27a8; }
+  .weather .row.shadow span {
+    font-size: 0.75em; }
+    .weather .row.shadow span span {
+      font-size: 0.875em;
+      font-family: "Dosis", sans-serif;
+      margin-left: 0.1875em;
+      text-transform: uppercase; }
 
 .schedule {
   text-transform: uppercase;
-  font-size: 0.8125em; }
-
-.current-time {
-  float: left;
-  color: #eb27a8;
-  font-size: 1.5em;
-  margin-top: 0.125em; }
-
-.now {
-  margin: 0.625em 0; }
-
-.red {
-  color: red; }
+  *zoom: 1; }
+  .schedule:before, .schedule:after {
+    content: " ";
+    display: table; }
+  .schedule:after {
+    clear: both; }
+  .schedule .icon-clock {
+    margin-right: 0.3125em; }
 
 .current {
   text-transform: uppercase;
   color: #eb27a8;
   font-size: 1.5em; }
-
-.row h1.heading {
-  font-size: 1.5em;
-  margin: 1.25em 0 1.25em 0; }
 
 .dimmed {
   color: #7ba1ba; }
@@ -1915,23 +2070,64 @@ ul.sostyled li {
   ul.sostyled li span.option {
     margin-left: 0.3125em; }
 
-header .icon {
-  cursor: pointer; }
+ul.floatleft {
+  list-style-type: none;
+  padding: 0;
+  margin: 0; }
 
-h1.heading {
-  margin: 0.125em 0; }
+ul.floatleft li {
+  float: left;
+  cursor: pointer;
+  margin: 0;
+  margin-right: 0.3125em;
+  text-transform: uppercase;
+  font-size: 0.75em;
+  padding: 0; }
 
-section {
+@media screen and (max-width: 768px) and (orientation: portrait), screen and (max-device-width: 768px) and (orientation: portrait) {
+  body {
+    font-size: 32px; } }
+@media screen and (max-width: 360px) and (orientation: portrait), screen and (max-device-width: 360px) and (orientation: portrait) {
+  body {
+    font-size: 18px; } }
+@media screen and (max-width: 360px) and (orientation: landscape), screen and (max-device-width: 360px) and (orientation: landscape) {
+  body {
+    font-size: 18px; } }
+@media screen and (max-width: 320px) and (orientation: portrait), screen and (max-device-width: 320px) and (orientation: portrait) {
+  body {
+    font-size: 18px; } }
+@media screen and (max-width: 320px) and (orientation: landscape), screen and (max-device-width: 320px) and (orientation: landscape) {
+  body {
+    font-size: 18px; } }
+.top_5 {
+  margin-top: 0.3125em; }
+
+.top_10 {
+  margin-top: 0.625em; }
+
+.top_15 {
+  margin-top: 0.9375em; }
+
+.top_20 {
   margin-top: 1.25em; }
 
-.schedule {
-  margin: 0.625em 0; }
+.bottom_5 {
+  margin-bottom: 0.3125em; }
 
-.luas {
-  margin-top: 0.875em; }
+.bottom_10 {
+  margin-bottom: 0.625em; }
 
-.luas .icon-clock {
-  margin-right: 0.3125em; }
+.bottom_15 {
+  margin-bottom: 0.9375em; }
+
+.bottom_20 {
+  margin-bottom: 1.25em; }
+
+.bottom_30 {
+  margin-bottom: 1.875em; }
+
+.bottom_40 {
+  margin-bottom: 2.5em; }
 
 @font-face {
   font-family: 'icomoon';

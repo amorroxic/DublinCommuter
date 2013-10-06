@@ -90,17 +90,22 @@
   app.filter('timeformat', function() {
     var filterFunction;
     filterFunction = function(input, param) {
-      var returnValue;
+      var appendValue, returnValue;
+      if (param != null) {
+        appendValue = param;
+      } else {
+        appendValue = 'minute';
+      }
       if (isFinite(input)) {
-        switch (input) {
+        switch (String(input)) {
           case '':
             returnValue = input;
             break;
           case '1':
-            returnValue = input + ' minute';
+            returnValue = input + ' ' + appendValue;
             break;
           default:
-            returnValue = input + ' minutes';
+            returnValue = input + ' ' + appendValue + 's';
         }
       } else {
         returnValue = input;
@@ -297,7 +302,7 @@
       return _ref;
     }
 
-    BaseFunctionality.API_ENDPOINT = 'http://api.dublin.io/api/v1';
+    BaseFunctionality.API_ENDPOINT = 'http://api.dublin.io/api/v2';
 
     settings = {
       debug: false
@@ -927,20 +932,39 @@
     };
 
     ForecastManager.prototype.populateForecast = function(data) {
-      var currentDate, currentForecast, currentTime;
-      currentTime = data.time;
+      var currentDate, currentForecast, currentTime, hourlyForecast, newForecast, _i, _len, _ref2, _results;
+      currentTime = data.currently.time;
       currentDate = new Date(currentTime * 1000);
       currentForecast = {
         'key': currentDate.yyyymmddh(),
         'date': currentDate.yyyymmdd(),
-        'timestamp': data.time,
-        'summary': data.summary,
-        'icon': data.icon,
-        'temp': parseInt(data.temp)
+        'timestamp': data.currently.time,
+        'summary': data.currently.summary,
+        'icon': data.currently.icon,
+        'temp': parseInt(data.currently.temp)
       };
       this.forecast.current = currentForecast;
       this.forecast.coordinates = this.coordinates;
-      return this.forecast.days = {};
+      this.forecast.upcoming = {};
+      _ref2 = data.hourly;
+      _results = [];
+      for (_i = 0, _len = _ref2.length; _i < _len; _i++) {
+        hourlyForecast = _ref2[_i];
+        currentTime = hourlyForecast.time;
+        currentDate = new Date(currentTime * 1000);
+        newForecast = {
+          'hours': hourlyForecast.hours,
+          'key': currentDate.yyyymmddh(),
+          'date': currentDate.yyyymmdd(),
+          'timestamp': hourlyForecast.time,
+          'summary': hourlyForecast.summary,
+          'icon': hourlyForecast.icon,
+          'temp': parseInt(hourlyForecast.temp)
+        };
+        this.forecast.upcoming[newForecast.key] = newForecast;
+        _results.push(newForecast = null);
+      }
+      return _results;
     };
 
     ForecastManager.prototype.hasValidForecast = function() {

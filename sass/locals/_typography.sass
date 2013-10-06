@@ -7,94 +7,33 @@
 
 body
     font-family: 'Dosis', sans-serif
-    font-size: 28px
+    font-size: 24px
     font-weight: 700
     margin-left: 0
 
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak
     display: none !important
 
-@media screen and (max-width: 980px) and (orientation:portrait), screen and (max-device-width: 980px) and (orientation:portrait)
-    body
-        margin-left: emCalc(15px)
-        font-size: 46px
-
-// 800 x 1280
-@media screen and (max-width: 800px) and (orientation:portrait), screen and (max-device-width: 800px) and (orientation:portrait)
-    body
-        margin-left: emCalc(10px)
-        font-size: 44px
-@media screen and (max-width: 1280px) and (orientation:landscape), screen and (max-device-width: 1280px) and (orientation:landscape)
-    body
-        margin-left: emCalc(20px)
-        font-size: 28px
-
-
-// 768 x 1024
-@media screen and (max-width: 768px) and (orientation:portrait), screen and (max-device-width: 768px) and (orientation:portrait)
-    body
-        font-size: 36px
-        margin-left: emCalc(22px)
-@media screen and (max-width: 1024px) and (orientation:landscape), screen and (max-device-width: 1024px) and (orientation:landscape)
-    body
-        font-size: 28px
-        margin-left: emCalc(22px)
-
-
-@media screen and (max-width: 600px) and (orientation:portrait), screen and (max-device-width: 600px) and (orientation:portrait)
-    body
-        font-size: 36px
-        margin-left: emCalc(8px)
-
-// 360 x 640
-@media screen and (max-width: 360px) and (orientation:portrait), screen and (max-device-width: 360px) and (orientation:portrait)
-    body
-        font-size: 22px
-        margin-left: emCalc(4px)
-@media screen and (max-width: 640px) and (orientation:landscape), screen and (max-device-width: 640px) and (orientation:landscape)
-    body
-        font-size: 30px
-        margin-left: emCalc(30px)
-
-
-// 360 x 640
-@media screen and (max-width: 360px) and (orientation:portrait), screen and (max-device-width: 360px) and (orientation:portrait)
-    body
-        font-size: 22px
-        margin-left: emCalc(4px)
-@media screen and (max-width: 360px) and (orientation:landscape), screen and (max-device-width: 360px) and (orientation:landscape)
-    body
-        font-size: 22px
-        margin-left: emCalc(4px)
-
-
-
-// 320 x 480
-@media screen and (max-width: 320px) and (orientation:portrait), screen and (max-device-width: 320px) and (orientation:portrait)
-    body
-        font-size: 18px
-        margin-left: emCalc(10px)
-
-@media screen and (max-width: 480px) and (orientation:landscape), screen and (max-device-width: 480px) and (orientation:landscape)
-    body
-        font-size: 26px
-        margin-left: emCalc(20px)
-
-@media screen and (max-width: 320px) and (orientation:portrait), screen and (max-device-width: 320px) and (orientation:portrait)
-    body
-        font-size: 18px
-        margin-left: emCalc(10px)
-
-@media screen and (max-width: 320px) and (orientation:landscape), screen and (max-device-width: 320px) and (orientation:landscape)
-    body
-        font-size: 18px
-        margin-left: emCalc(10px)
-
-
 h1
     font-family: 'Dosis', sans-serif
     font-size: emCalc(32px)
     text-transform: uppercase
+
+.row h1.heading
+    font-size: emCalc(24px)
+    margin: emCalc(20px) 0 emCalc(20px) 0
+
+.row.shadow
+    //-webkit-box-shadow: inset 0px 0px 5px 1px rgba(0, 0, 0, .2)
+    //box-shadow: inset 0px 0px 5px 1px rgba(0, 0, 0, .2)
+    //-webkit-border-radius: 30px
+    //border-radius: 30px
+    color: #000
+    text-transform: uppercase
+
+header
+    .icon
+        cursor: pointer
 
 nav
     font-size: emCalc(18px)
@@ -102,68 +41,39 @@ nav
         font-size: emCalc(14px)
         color: #444
 
+span
+    white-space: nowrap
+
+.current-date
+    text-transform: uppercase
+
+.current-time
+    color: #eb27a8
+    font-size: emCalc(24px)
 
 .weather
     font-size: emCalc(24px)
-    text-transform: uppercase
     color: #eb27a8
-    float: left
-    margin-top: emCalc(1px)
+    .row.shadow
+        span
+            font-size: emCalc(12px)
+            span
+                font-size: emCalc(14px)
+                font-family: 'Dosis', sans-serif
+                margin-left: emCalc(3px)
+                text-transform: uppercase
 
-.now
-    clear: both
-    width: 100%
-
-.currentdate
-    text-transform: uppercase
-    font-size: emCalc(12px)
-    text-align: center
-    width: emCalc(100px)
-    float: left
-    border-right: emCalc(3px) solid #000
-    border-left: emCalc(3px) solid #000
-    margin: 0 emCalc(20px)
-    div
-        &.day
-            width: 100%
-            font-size: emCalc(24px)
-        &.month
-            display: block
-            width: 100%
-            font-size: emCalc(16px)
-
-.icon-forecast
-    font-size: emCalc(14px)
-    color: #000
-    margin-top: -emCalc(20px)
-
-.temperature
-    margin-left: emCalc(3px)
 
 .schedule
     text-transform: uppercase
-    font-size: emCalc(13px)
-
-.current-time
-    float: left
-    color: #eb27a8
-    font-size: emCalc(24px)
-    margin-top: emCalc(2px)
-
-.now
-    margin: emCalc(10px) 0
-
-.red
-    color: #ff0000
+    @include clearfix
+    .icon-clock
+        margin-right: emCalc(5px)
 
 .current
     text-transform: uppercase
     color: #eb27a8
     font-size: emCalc(24px)
-
-.row h1.heading
-    font-size: emCalc(24px)
-    margin: emCalc(20px) 0 emCalc(20px) 0
 
 .dimmed
     color: #7ba1ba
@@ -188,6 +98,43 @@ ul.sostyled
         span.option
             margin-left: emCalc(5px)
 
-header
-    .icon
+
+ul.floatleft
+    list-style-type: none
+    padding: 0
+    margin: 0
+
+ul.floatleft
+    li
+        float: left
         cursor: pointer
+        margin: 0
+        margin-right: emCalc(5px)
+        text-transform: uppercase
+        font-size: emCalc(12px)
+        padding: 0
+
+@media screen and (max-width: 768px) and (orientation:portrait), screen and (max-device-width: 768px) and (orientation:portrait)
+    body
+        font-size: 32px
+
+//@media screen and (max-width: 768px) and (orientation:landscape), screen and (max-device-width: 768px) and (orientation:landscape)
+    //body
+        //font-size: 100px
+
+@media screen and (max-width: 360px) and (orientation:portrait), screen and (max-device-width: 360px) and (orientation:portrait)
+    body
+        font-size: 18px
+
+@media screen and (max-width: 360px) and (orientation:landscape), screen and (max-device-width: 360px) and (orientation:landscape)
+    body
+        font-size: 18px
+
+@media screen and (max-width: 320px) and (orientation:portrait), screen and (max-device-width: 320px) and (orientation:portrait)
+    body
+        font-size: 18px
+
+@media screen and (max-width: 320px) and (orientation:landscape), screen and (max-device-width: 320px) and (orientation:landscape)
+    body
+        font-size: 18px
+

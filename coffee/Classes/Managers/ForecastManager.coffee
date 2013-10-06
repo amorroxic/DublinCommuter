@@ -88,45 +88,38 @@ class ForecastManager extends LocalStorage
 
     populateForecast: (data) ->
 
-        currentTime = data.time
+        currentTime = data.currently.time
         currentDate = new Date currentTime*1000
 
         currentForecast = {
             'key'           : do currentDate.yyyymmddh,
             'date'          : do currentDate.yyyymmdd,
-            'timestamp'     : data.time,
-            'summary'       : data.summary,
-            'icon'          : data.icon,
-            'temp'          : parseInt(data.temp)
+            'timestamp'     : data.currently.time,
+            'summary'       : data.currently.summary,
+            'icon'          : data.currently.icon,
+            'temp'          : parseInt(data.currently.temp)
         }
 
         @forecast.current       = currentForecast
         @forecast.coordinates   = @coordinates
-        @forecast.days          = {}
+        @forecast.upcoming          = {}
 
-        #for dayforecast in data.weather
+        for hourlyForecast in data.hourly
 
-            #newForecast = {
-                #'date'          : dayforecast.date,
-                #'precip_mm'     : dayforecast.precipMM,
-                #'temp_min'      : {
-                                    #'f' :   dayforecast.tempMinF,
-                                    #'c' :   dayforecast.tempMinC
-                                #},
-                #'temp_max'      : {
-                                    #'f' :   dayforecast.tempMaxF,
-                                    #'c' :   dayforecast.tempMaxC
-                                #},
-                #'description'   : dayforecast.weatherDesc[0].value,
-                #'icon'          : dayforecast.weatherIconUrl[0].value,
-                #'wind'          : {
-                                    #'m'         : dayforecast.windspeedMiles,
-                                    #'km'        : dayforecast.windspeedKmph,
-                                    #'direction' : dayforecast.winddir16Point
-                                #}
-            #}
-            #@forecast.days[dayforecast.date] = newForecast
-            #newForecast = null
+            currentTime = hourlyForecast.time
+            currentDate = new Date currentTime*1000
+
+            newForecast = {
+                'hours'         : hourlyForecast.hours,
+                'key'           : do currentDate.yyyymmddh,
+                'date'          : do currentDate.yyyymmdd,
+                'timestamp'     : hourlyForecast.time,
+                'summary'       : hourlyForecast.summary,
+                'icon'          : hourlyForecast.icon,
+                'temp'          : parseInt(hourlyForecast.temp)
+            }
+            @forecast.upcoming[newForecast.key] = newForecast
+            newForecast = null
 
     hasValidForecast: () ->
         status = no

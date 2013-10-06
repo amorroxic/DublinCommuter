@@ -75,11 +75,17 @@ app.factory "dublinTimingFactory", ($q, $rootScope, safeApply, dublinLuasFactory
 
 app.filter 'timeformat', () ->
     filterFunction = (input, param) ->
+
+        if param?
+            appendValue = param
+        else
+            appendValue = 'minute'
+
         if isFinite input
-            switch input
+            switch String(input)
                 when '' then returnValue = input
-                when '1' then returnValue = input + ' minute'
-                else returnValue = input + ' minutes'
+                when '1' then returnValue = input + ' ' + appendValue
+                else returnValue = input + ' ' + appendValue + 's'
         else
             returnValue = input
         returnValue

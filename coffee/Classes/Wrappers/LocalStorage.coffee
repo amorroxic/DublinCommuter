@@ -4,9 +4,9 @@ class LocalStorage extends BaseFunctionality
 		localStorage.setItem(key, JSON.stringify(data))
 
 	retrieve: (key) ->
-		retrievedObject = localStorage.getItem(key)
-		parsedObject = JSON.parse(retrievedObject)
-		parsedObject
+        retrievedObject = localStorage.getItem(key)
+        parsedObject = JSON.parse(retrievedObject)
+        parsedObject
 
 	remove: (key) ->
 		localStorage.removeItem(key)
