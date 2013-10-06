@@ -2,8 +2,8 @@
     <widget xmlns = "http://www.w3.org/ns/widgets"
         xmlns:gap = "http://phonegap.com/ns/1.0"
         id        = "io.dublin.commuter"
-        versionCode="101"
-        version   = "1.0.1">
+        versionCode="102"
+        version   = "1.0.2">
     <!-- versionCode is optional and Android only -->
     <name>Dublin Commuter</name>
     <description>
@@ -12,13 +12,15 @@
     <author href="http://dublin.io" email="dcapp@dublin.io">
         Adrian Mihai
     </author>
-	<preference name="phonegap-version" value="2.9.0" />
+	<gap:platform name="ios" />
+	<gap:platform name="android" />
+	<preference name="phonegap-version" value="3.0.0" />
 	<preference name="orientation" value="both" />
 	<preference name="target-device" value="universal" />
 	<preference name="fullscreen" value="true" />
 	<preference name="exit-on-suspend" value="true" />
 	<preference name="show-splash-screen-spinner" value="true" />
-	<preference name="splash-screen-duration" value="5000" />
+	<preference name="splash-screen-duration" value="0" />
 	<icon src="icon.png" />
 	<icon src="img/touch/apple-touch-icon-57x57-precomposed.png" gap:platform="ios" width="57" height="57" />
 	<icon src="img/touchapple-touch-icon-114x114-precomposed.png" gap:platform="ios" width="114" height="114" />
@@ -29,7 +31,9 @@
 	<icon src="img/touch/apple-touch-icon-72x72-precomposed.png" gap:platform="android" gap:density="mdpi" />
     <icon src="img/touch/apple-touch-icon-114x114-precomposed.png" gap:platform="android" gap:density="hdpi" />
 	<icon src="img/touch/apple-touch-icon-144x144-precomposed.png" gap:platform="android" gap:density="xhdpi" />
-	<gap:splash src="splash.png" />
+	<gap:splash gap:density="ldpi" gap:platform="android" src="img/splash/ldpi.png" />
+	<gap:splash gap:density="mdpi" gap:platform="android" src="img/splash/mdpi.png" />
+	<gap:splash gap:density="hdpi" gap:platform="android" src="img/splash/hdpi.png" />
 	<preference name="permissions" value="none"/>
 	<access origin="http://dublin.io" subdomains="true" />
 </widget>
