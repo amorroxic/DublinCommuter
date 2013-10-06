@@ -43,7 +43,7 @@
 		<header>
             <div class="row">
                 <div class="twelve columns">
-                    <h1 class="heading">Dublin Commuter <div class="icon" data-ng-cloak data-ng-click="chooseAnotherStation()"><span class="icon-arrow-left"></span></div></h1>
+                    <h1 class="heading">Dublin Commuter <div class="icon" ng-show="dublinCommuter.luasManager.hasLuas()" data-ng-cloak data-ng-click="chooseAnotherStation()"><span class="icon-arrow-left"></span></div></h1>
                 </div>
             </div>
 		</header>
@@ -74,7 +74,9 @@
                             <div class="current-time">{{timerInstance.currentDate | date: 'HH:mm'}}</div>
                         </div>
                         <div class="large-4 small-4 columns">
-                            <div class="current-date"><div class="day">{{timerInstance.currentDate | date: 'dd'}}</div><div class="month">{{timerInstance.currentDate | date: 'MMMM'}}</div></div>
+                            <div class="current-time">
+                                 <span>{{timerInstance.currentDate | date: 'dd'}} {{timerInstance.currentDate | date: 'MMM'}}</span>
+                             </div>
                         </div>
                     </div>
 

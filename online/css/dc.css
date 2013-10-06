@@ -1985,7 +1985,7 @@ h1 {
   margin: 1.25em 0 1.25em 0; }
 
 .row.shadow {
-  color: black;
+  color: #222222;
   text-transform: uppercase; }
 
 header .icon {
@@ -2006,6 +2006,9 @@ span {
 .current-time {
   color: #eb27a8;
   font-size: 1.5em; }
+  .current-time span {
+    color: #222222;
+    text-transform: uppercase; }
 
 .weather {
   font-size: 1.5em;
@@ -2015,7 +2018,7 @@ span {
     .weather .row.shadow span span {
       font-size: 0.875em;
       font-family: "Dosis", sans-serif;
-      margin-left: 0.1875em;
+      margin-left: 0.3125em;
       text-transform: uppercase; }
 
 .schedule {
