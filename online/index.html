@@ -43,7 +43,7 @@
 		<header>
             <div class="row">
                 <div class="twelve columns">
-                    <h1 class="heading">Dublin Commuter <div class="icon" ng-show="dublinCommuter.luasManager.hasLuas()" data-ng-cloak data-ng-click="chooseAnotherStation()"><span class="icon-arrow-left"></span></div></h1>
+                    <h1 class="heading">Dublin Commuter - {{timerInstance.currentDate | date: 'dd'}} {{timerInstance.currentDate | date: 'MMM'}}<div class="icon" ng-show="dublinCommuter.luasManager.hasLuas()" data-ng-cloak data-ng-click="chooseAnotherStation()"><span class="icon-arrow-left"></span></div></h1>
                 </div>
             </div>
 		</header>
@@ -53,17 +53,18 @@
                 <div class="large-6 small-12 columns bottom_40 medium-12">
 
                     <div class="row" data-ng-cloak>
-                        <div class="large-4 small-4 columns">
+                        <div class="large-12 small-12 columns">
                             <div class="weather" ng-show="dublinCommuter.weatherManager.hasForecast()">
                                 <div class="row">
-                                    <div class="columns large-12 bottom_20">
-                                    <span class="{{dublinCommuter.weatherManager.forecast.current.icon}}"></span>
-                                    <span class="temperature">{{dublinCommuter.weatherManager.forecast.current.temp}}&deg;</span>
-                                </div>
+                                    <div class="columns large-12 bottom_10">
+                                        <span class="current-time">{{timerInstance.currentDate | date: 'HH:mm'}}</span>
+                                        <span class="{{dublinCommuter.weatherManager.forecast.current.icon}}"></span>
+                                        <span class="temperature">{{dublinCommuter.weatherManager.forecast.current.temp}}&deg;</span>
+                                    </div>
                                 </div>
 
                                 <div class="row shadow top_20">
-                                    <div class="large-12 small-12 columns top_5" data-ng-repeat="forecast in dublinCommuter.weatherManager.forecast.upcoming">
+                                    <div class="large-12 small-12 columns" data-ng-repeat="forecast in dublinCommuter.weatherManager.forecast.upcoming">
                                             <span class="{{forecast.icon}}"><span class="temperature">{{forecast.temp}}&deg; in {{forecast.hours | timeformat:'hour'}}</span></span>
 
                                     </div>
@@ -74,14 +75,7 @@
                                 <span class="temperature"></span>
                             </div>
                         </div>
-                        <div class="large-4 small-4 columns">
-                            <div class="current-time">{{timerInstance.currentDate | date: 'HH:mm'}}</div>
-                        </div>
-                        <div class="large-4 small-4 columns">
-                            <div class="current-time">
-                                 <span>{{timerInstance.currentDate | date: 'dd'}} {{timerInstance.currentDate | date: 'MMM'}}</span>
-                             </div>
-                        </div>
+
                     </div>
 
 
