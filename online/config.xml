@@ -20,7 +20,7 @@
 	<preference name="fullscreen" value="true" />
 	<preference name="exit-on-suspend" value="true" />
 	<preference name="show-splash-screen-spinner" value="true" />
-	<preference name="splash-screen-duration" value="0" />
+	<preference name="splash-screen-duration" value="10" />
 	<icon src="icon.png" />
 	<icon src="img/touch/apple-touch-icon-57x57-precomposed.png" gap:platform="ios" width="57" height="57" />
 	<icon src="img/touchapple-touch-icon-114x114-precomposed.png" gap:platform="ios" width="114" height="114" />
