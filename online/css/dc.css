@@ -1982,7 +1982,8 @@ h1 {
 
 .row h1.heading {
   font-size: 1.5em;
-  margin: 1.25em 0 1.25em 0; }
+  margin: 1.25em 0 1.25em 0;
+  white-space: nowrap; }
 
 .row.shadow {
   color: #222222;
